@@ -4,4 +4,4 @@ class Pantry {
   }
 }
 
-export default Pantry;
+module.exports = Pantry;
