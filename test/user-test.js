@@ -56,4 +56,10 @@ describe('User', () => {
   it('Should inform User if they lack required ingredients for a given recipe', () => {
     expect(user1.checkPantry(recipeIngredients)).to.eql(missingIngredientsWithPrice);
   });
+
+  it('Should be able to add a recipe to recipesToCook', () => {
+    user1.addtoRecipesToCook(recipeData[1]);
+
+    expect(user1.recipesToCook).to.deep.eql([recipeData[1]]);
+  });
 });
