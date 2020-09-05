@@ -20,7 +20,34 @@ class Recipe {
     });
     return costCounter;
   }
-
+  returnInstructions() {
+    return this.instructions
+  }
+  filterByTag(letter) {
+    var tags =  this.tags.filter(tag =>{
+      return tag.split('').includes(letter.toLowerCase())
+    })
+    console.log(tags)
+    return tags
+  }
+  containsIngredient(inputIngredient) { 
+    let filterdArray = this.ingredients.filter(ingredient => {
+      return ingredient.name.includes(inputIngredient.toLowerCase())
+    })
+    if (filterdArray.length > 0) {
+      return true
+    }
+  }
+  searchByIngredient(inputIngredient) {
+    var ing =  this.ingredients.find(ingredient => {
+      return ingredient.name.includes(inputIngredient.toLowerCase())
+    })
+    if (ing.name === undefined) {
+      return false
+    }
+    return ing.name
+    
+  }
 }
 
 export default Recipe;
