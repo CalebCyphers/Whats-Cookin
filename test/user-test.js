@@ -57,7 +57,8 @@ describe('User', () => {
   it('Should be able to search favoriteRecipes by name or ingredient', () => {
     user1.addToFavorites(recipeData[0]);
     user1.addToFavorites(recipeData[1]);
-    //add another expect statement for searching by recipe name
+
+    expect(user1.findFavorites('Loaded Chocolate Chip Pudding Cookie Cups')).to.eql([recipeData[0]])
     expect(user1.findFavorites('egg')).to.eql([recipeData[0]]);
   });
 
