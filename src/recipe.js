@@ -23,8 +23,13 @@ class Recipe {
   returnInstructions() {
     return this.instructions
   }
-  filterbyTag(letter) {
+  filterByTag(letter) {
     return this.tags.includes(letter.toLowerCase())
+  }
+  SearchByIngredient('ingredient') {
+    return this.ingredients.filter(ingredient => {
+      return ingredient.name.includes(ingredient.toLowerCase())
+    })
   }
 }
 
