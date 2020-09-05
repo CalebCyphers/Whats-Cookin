@@ -1,3 +1,4 @@
+@media screen and (min-width: 760px) {
 html {
   background-color: #37515C;
   border: 2px solid #000;
@@ -190,4 +191,5 @@ main {
 .favorite-active {
   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
   background-repeat: no-repeat;
+}
 }
