@@ -85,7 +85,7 @@ describe('User', () => {
     user1.addToFavorites(recipeData[0]);
     user1.addToFavorites(recipeData[1]);
 
-    expect(user1.filterFavorites('antipasti')).to.eql([recipeData[0]]);
+    expect(user1.filterFavorites('antipasti')).to.deep.eql([recipeData[0]]);
   });
 
   it('Should be able to search favoriteRecipes by name or ingredient', () => {
@@ -127,6 +127,13 @@ describe('User', () => {
     })
 
     expect(user1.checkPantry(recipe)).to.eql(missingIngredients);
+  });
+
+  it('Should be able to filter recipes to cook by tag', () => {
+    user1.addToRecipesToCook(recipeData[0]);
+    user1.addToRecipesToCook(recipeData[1]);
+
+    expect(user1.filterRecipesToCook('starter')).to.deep.eql([recipeData[0]]);
   });
 
   it('Should start the User off with zero recipes to cook', () => {
