@@ -24,11 +24,23 @@ class Recipe {
     return this.instructions
   }
   filterByTag(letter) {
-    return this.tags.includes(letter.toLowerCase())
+    var tags =  this.tags.filter(tag =>{
+      return tag.split('').includes(letter.toLowerCase())
+    })
+    console.log(tags)
+    return tags
   }
-  SearchByIngredient('ingredient') {
-    return this.ingredients.filter(ingredient => {
-      return ingredient.name.includes(ingredient.toLowerCase())
+  containsIngredient(inputIngredient) { 
+    let filterdArray = this.ingredients.filter(ingredient => {
+      return ingredient.name.includes(inputIngredient.toLowerCase())
+    })
+    if (filterdArray.length > 0) {
+      return true
+    }
+  }
+  searchByIngredient(inputIngredient) {
+    return this.ingredients.find(ingredient => {
+      return ingredient.name.includes(inputIngredient.toLowerCase())
     })
   }
 }
