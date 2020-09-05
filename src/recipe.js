@@ -39,9 +39,14 @@ class Recipe {
     }
   }
   searchByIngredient(inputIngredient) {
-    return this.ingredients.find(ingredient => {
+    var ing =  this.ingredients.find(ingredient => {
       return ingredient.name.includes(inputIngredient.toLowerCase())
     })
+    if (ing.name === undefined) {
+      return false
+    }
+    return ing.name
+    
   }
 }
 
