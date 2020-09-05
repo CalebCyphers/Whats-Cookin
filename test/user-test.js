@@ -23,7 +23,41 @@ describe('User', () => {
     );
   });
 
-  it('Should have a property of favoriteRecipes with a default value', () => {
+  it('Should be a function', () => {
+    expect(User).to.be.a('function');
+  });
+
+  it('Should be an instance of User', () => {
+    expect(user1).to.be.an.instanceOf(User);
+  });
+
+  it('Should have a unique id', () => {
+    expect(user1.id).to.eql(1);
+  });
+
+  it('Should have a name', () => {
+    expect(user1.name).to.eql('Boba');
+  });
+
+  it('Should have a pantry', () => {
+    const pantry = [
+      {
+        'ingredient': 1077,
+        'amount': 1
+      },
+      {
+        'ingredient': 14412,
+        'amount': 1
+      },
+      {
+        'ingredient': 1009054,
+        'amount': 3
+      }];
+
+    expect(user1.pantry).to.deep.eql(pantry);
+  });
+
+  it('Should have a property of favoriteRecipes with a default value of empty array', () => {
     expect(user1.favoriteRecipes).to.eql([]);
   });
 
@@ -50,7 +84,7 @@ describe('User', () => {
   it('Should be able to filter through favoriteRecipes by tag', () => {
     user1.addToFavorites(recipeData[0]);
     user1.addToFavorites(recipeData[1]);
-  
+
     expect(user1.filterFavorites('antipasti')).to.eql([recipeData[0]]);
   });
 
