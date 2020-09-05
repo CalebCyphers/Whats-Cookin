@@ -20,7 +20,9 @@ class Recipe {
     });
     return costCounter;
   }
-
+  returnInstructions() {
+    return this.instructions
+  }
 }
 
 export default Recipe;
