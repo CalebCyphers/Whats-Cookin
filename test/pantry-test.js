@@ -115,5 +115,10 @@ describe('Pantry', () => {
     expect(result).to.deep.equal(testUser.pantry[1].ingredient)
   });
 
+  it('should be able to tell if the user has enough ingredients to cook a given recipe', () => {
+    let result = testPantry.determineIfUserHasEnoughIngredients(testRecipeData[0])
+    expect(result).to.equal(true)
+  });
+
 });
 
