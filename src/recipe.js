@@ -23,6 +23,9 @@ class Recipe {
   returnInstructions() {
     return this.instructions
   }
+  filterbyTag(letter) {
+    return this.tags.includes(letter.toLowerCase())
+  }
 }
 
 export default Recipe;
