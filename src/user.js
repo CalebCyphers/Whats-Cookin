@@ -24,6 +24,12 @@ class User {
     })
   }
 
+  filterRecipesToCook(tag) {
+    return this.recipesToCook.filter(recipe => {
+      return recipe.tags.includes(tag);
+    })
+  }
+
   findFavorites(strgToSrch) {
     return this.favoriteRecipes.filter(recipe => {
       return recipe.name.includes(strgToSrch)
@@ -51,6 +57,5 @@ class User {
     this.recipesToCook.push(recipe);
   }
 }
-
 
 export default User;
