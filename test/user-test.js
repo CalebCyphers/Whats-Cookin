@@ -30,7 +30,7 @@ describe('User', () => {
   it('Should be able to add recipes to favoriteRecipes', () =>{
     user1.addToFavorites(recipeData[0]);
     user1.addToFavorites(recipeData[2]);
-    
+
     expect(user1.favoriteRecipes.includes(recipeData[0])).to.eql(true);
     expect(user1.favoriteRecipes.includes(recipeData[2])).to.eql(true);
     expect(user1.favoriteRecipes).to.deep.eql([recipeData[0], recipeData[2]]);
@@ -38,7 +38,12 @@ describe('User', () => {
 
   it('Should be able to remove recipes from favoriteRecipes', () =>{
     user1.removeFromFavorites(recipeData);
-    //add more thorough testing here
+    user1.addToFavorites(recipeData[1]);
+
+    expect(user1.favoriteRecipes).to.deep.eql([recipeData[1]]);
+
+    user1.removeFromFavorites(recipeData[1]);
+
     expect(user1.favoriteRecipes).to.eql([]);
   });
 
