@@ -6,10 +6,11 @@ describe('Pantry', () => {
   let testUserData
   let testIngredientsData
   let testRecipeData
+  let testUser
+  let testPantry
+
 
   beforeEach(() => {
-    testPantry = new Pantry()
-    testUser = new User
     testUserData = {
       "id": 2,
       "name": "Dingus Dangus",
@@ -99,15 +100,20 @@ describe('Pantry', () => {
         ]
       }
     ]
-  
+    
+    testUser = new User(testUserData.id, testUserData.name, testUserData.pantry)
+    testPantry = new Pantry(testUser.pantry)
   });
 
-  
-
-  
 
   it('should be a function', () => {
     expect(Pantry).to.be.a("function")
   });
+
+  it('should contain an array of the user\'s ingredients', () => {
+    let result = testPantry.contents[1].ingredient
+    expect(result).to.deep.equal(testUser.pantry[1].ingredient)
+  });
+
 });
 
