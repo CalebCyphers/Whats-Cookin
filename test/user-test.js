@@ -50,7 +50,7 @@ describe('User', () => {
   it('Should be able to filter through favoriteRecipes by tag', () => {
     user1.addToFavorites(recipeData[0]);
     user1.addToFavorites(recipeData[1]);
-    //search by id property of each recipe? or by name?
+  
     expect(user1.filterFavorites('antipasti')).to.eql([recipeData[0]]);
   });
 
@@ -58,7 +58,7 @@ describe('User', () => {
     user1.addToFavorites(recipeData[0]);
     user1.addToFavorites(recipeData[1]);
 
-    expect(user1.findFavorites('Loaded Chocolate Chip Pudding Cookie Cups')).to.eql([recipeData[0]])
+    expect(user1.findFavorites('Loaded Chocolate Chip Pudding Cookie Cups')).to.eql([recipeData[0]]);
     expect(user1.findFavorites('egg')).to.eql([recipeData[0]]);
   });
 
@@ -79,6 +79,7 @@ describe('User', () => {
           'amount': 3
         }
       ]};
+
     expect(user1.checkPantry(recipe)).to.eql('You have all the ingredients in your pantry!');
   });
 
@@ -90,17 +91,19 @@ describe('User', () => {
     const missingIngredients = recipe.ingredients.filter(item => {
       return !(pantryIngredients.includes(item.id));
     })
+
     expect(user1.checkPantry(recipe)).to.eql(missingIngredients);
   });
 
   it('Should start the User off with zero recipes to cook', () => {
     expect(user1.recipesToCook).to.deep.eql([]);
     expect(user1.recipesToCook.length).to.eql(0);
-  })
+  });
 
   it('Should be able to add recipes to recipesToCook', () => {
     user1.addToRecipesToCook(recipeData[1]);
     user1.addToRecipesToCook(recipeData[3]);
+
     expect(user1.recipesToCook).to.deep.eql([recipeData[1], recipeData[3]]);
   });
 });
