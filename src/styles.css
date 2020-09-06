@@ -5,11 +5,13 @@ body {
 .main-header {
   display: flex;
   border-bottom: 2px solid #000;
+  background-color: #D9C7DD;
 }
 
 .hamburger-menu {
-  height: 5rem;
-  width: 5rem;
+  height: 4rem;
+  width: 4rem;
+  padding-right: 8rem;
 }
 
 .header-title {
@@ -21,12 +23,13 @@ body {
 }
 
 .search-recipes-input {
-
+  height: 1.5rem;
+  width: 8rem;
 }
 
 .search-icon {
-  height: 1rem;
-  width: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 
