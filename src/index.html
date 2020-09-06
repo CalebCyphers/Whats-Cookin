@@ -4,25 +4,19 @@
     <meta charset='UTF-8'>
     <title>Whats Cookin</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap' rel='stylesheet'>
+    <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <header class='main-header'>
-      <h1>What's Cookin'</h1>
-      <p class='user-info'>Welcome, <span class='user-name'>User</span>.</p>
-      <label for='home-button' class='hidden'>Homepage button</label>
-      <button id='home-button' class='home navButton'>Home</button>
-      <label for='view-favorites-button' class='hidden'>View favorites</label>
-      <button id='view-favorites-button' class=' view-favorites navButton'>View Favorites</button>
-      <!-- <form class='search-bar'>
-        <label for='search-button' class='hidden'>Click here to search here</label>
-        <button id='search-button' class='search-button'>
-          <img class='search-image' src='https://image.flaticon.com/icons/svg/660/660029.svg' alt='Search button'>
-        </button>
-        <label for='search-input' class='hidden'>Type search query here</label>
-        <input id='search-input' class='search-input' type='text' placeholder='Search recipes by name or ingredients' value=''>
-      </form> -->
+      <img class="hamburger-menu" src="./images/hamburger-icon.png" alt="hamburger icon serving as menu button">
+      <h1 class="header-title">What's Cookin'</h1>
     </header>
     <main>
+      <h1 class="all-recipes-title">All Recipes</h1>
+      <section class="search-recipes">
+        <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+        <input class="search-recipes-input" type="text" placeholder="search recipes">
+      </section>
       <section class='all-cards'>
       </section>
     </main>
