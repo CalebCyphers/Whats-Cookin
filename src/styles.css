@@ -1,3 +1,47 @@
+body {
+  text-align: center;
+}
+
+.main-header {
+  display: flex;
+  border-bottom: 2px solid #000;
+}
+
+.hamburger-menu {
+  height: 5rem;
+  width: 5rem;
+}
+
+.header-title {
+  text-align: center;
+}
+
+.all-recipes-title {
+  text-align: center;
+}
+
+.search-recipes-input {
+
+}
+
+.search-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (min-width: 760px) {
 html {
   background-color: #37515C;
