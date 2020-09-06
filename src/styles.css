@@ -1,11 +1,21 @@
+html {
+  background-color: #37515C;
+  height: 100%;
+}
+
 body {
   text-align: center;
+  height: 100%;
+}
+
+main {
+  height: 100%;
 }
 
 .main-header {
   display: flex;
   border-bottom: 2px solid #000;
-  background-color: #D9C7DD;
+  background-color: #EBF5EE;
 }
 
 .hamburger-menu {
@@ -32,16 +42,28 @@ body {
   width: 1.5rem;
 }
 
+.all-recipe-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100%;
+}
 
+.single-recipe-card {
+  margin: 2rem;
+  height: 20%;
+  background-color: #D7F2FE;
+}
 
+.all-card-icons {
+  display: flex;
+  justify-content: space-between;
+}
 
-
-
-
-
-
-
-
+.card-icon {
+  height: 2rem;
+  width: 2rem;
+  border: solid;
+}
 
 
 
@@ -164,7 +186,7 @@ h1 {
   width: 13%;
 }
 
-.all-cards {
+.all-recipe-cards {
   display: grid;
   grid-gap: 30px;
   grid-template-columns: repeat(4, 1fr);
@@ -176,7 +198,7 @@ img {
   cursor: pointer;
 }
 
-.card {
+.single-recipe-card {
   background-color: #D7F2FE;
   border: 3px solid #000;
   width: 100%;
