@@ -1,35 +1,40 @@
 class Pantry {
   constructor(userIngredients) {
     this.contents = userIngredients;
+    this.filtered
+    this.goodAmount;
+    this.notEnough = []
   }
 
   determineIfUserHasEnoughIngredients(recipe) {
-    let filtered = recipe.ingredients.filter(ingredient => {
-      let ids = this.contents.map(ing =>{
-        return ing.ingredient 
-      })
- return ids.includes(ingredient.id)
+    let AllIngredientInPantryIds = this.contents.map(ing =>{
+      return ing.ingredient 
     })
-    let goodAmount =  filtered.filter((ing, i) =>{
-      let ids = this.contents.map(ing =>{
-        return ing.ingredient 
-      })
-    
-if (ids.indexOf(ing.id) > -1) {
-  return this.contents[ids.indexOf(ing.id)].amount >= ing.quantity.amount
-}
+
+     this.filtered = recipe.ingredients.filter(ingredient => {
+      return AllIngredientInPantryIds.includes(ingredient.id)
     })
-    return goodAmount.length === filtered.length
+
+     this.goodAmount =  this.filtered.filter(ing =>{
+      if (AllIngredientInPantryIds.indexOf(ing.id) > -1) {
+        if (!this.contents[AllIngredientInPantryIds.indexOf(ing.id)].amount >= ing.quantity.amount) {
+          this.notEnough.push(ing)
+        }
+        return this.contents[AllIngredientInPantryIds.indexOf(ing.id)].amount >= ing.quantity.amount
+      }
+    })
+    return this.goodAmount.length === this.filtered.length
   }
-// user pantry has amount
-//recipe has amount
-//each have an id
-// need to check every id in the pantry to recipe ingredients id
 
-//needed ingredients and amount from recipe vs ingredients in pantry
-//recipe: ingredients: quantity: amount
+  findAmountMissing(recipe) {
+//invoke determineIfUser... ()recipe
+    //if returns false => 
+    //find which ingredients are not satisfied by pantry
+  if (!this.determineIfUserHasEnoughIngredients(recipe)) { 
+    return this.notEnough.length
+    }
+  }
 }
-
 
 export default Pantry;
 
