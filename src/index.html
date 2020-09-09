@@ -4,26 +4,53 @@
     <meta charset='UTF-8'>
     <title>Whats Cookin</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap' rel='stylesheet'>
+    <link rel="stylesheet" href="./pantry.html">
+    <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <header class='main-header'>
-      <h1>What's Cookin'</h1>
-      <p class='user-info'>Welcome, <span class='user-name'>User</span>.</p>
-      <label for='home-button' class='hidden'>Homepage button</label>
-      <button id='home-button' class='home navButton'>Home</button>
-      <label for='view-favorites-button' class='hidden'>View favorites</label>
-      <button id='view-favorites-button' class=' view-favorites navButton'>View Favorites</button>
-      <!-- <form class='search-bar'>
-        <label for='search-button' class='hidden'>Click here to search here</label>
-        <button id='search-button' class='search-button'>
-          <img class='search-image' src='https://image.flaticon.com/icons/svg/660/660029.svg' alt='Search button'>
-        </button>
-        <label for='search-input' class='hidden'>Type search query here</label>
-        <input id='search-input' class='search-input' type='text' placeholder='Search recipes by name or ingredients' value=''>
-      </form> -->
+      <div class="wrapper">
+        <img class="hamburger-menu" src="./images/hamburger-icon.png" alt="hamburger icon serving as menu button">
+        <img class="x-menu hidden" src="./images/x-icon.png" alt="x icon to be clicked when you are done viewing the menu options">
+      </div>
+      <h1 class="header-title">What's Cookin'?</h1>
+      <h1 class="open-menu-title hidden">Menu</h1>
+      <div class="spacer"></div>
     </header>
-    <main>
-      <section class='all-cards'>
+    <section class="open-menu-selections hidden">
+      <article class="menu-my-pantry menu-selection hidden">
+        <h3 class="menu-my-pantry-title">My Pantry</h2>
+      </article>
+      <article class="menu-my-upcoming-recipes menu-selection hidden">
+        <h3 class="menu-my-upcoming-recipes-title">My Upcoming Recipes</h2>
+      </article>
+      <article class="menu-favorites menu-selection hidden">
+        <h3 class="menu-favorites-title">Favorites</h2>
+      </article>
+    </section>
+    <section class="all-recipes-and-search">
+      <h1 class="all-recipes-title">All Recipes</h1>
+      <section class="search-recipes">
+        <div class="wrapper">
+          <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+          <input class="search-recipes-input" type="text" placeholder="search recipes">
+        </div>
+      </section>
+    </section>
+    <main class="main">
+      <section class="all-recipe-cards">
+        <article class="single-recipe-card">
+          <article class="all-card-icons">
+            <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
+            <img class="heart-icon card-icon" src="./images/heart-icon.png" alt="empty heart icon used to favorite and unfavorite recipes">
+          </article>
+          <article class="card-image-section">
+            <img class="card-image" src="https://www.onceuponachef.com/images/2018/03/Breakfast-Burritos.jpg" alt="sample display of breakfast burritos">
+          </article>
+          <article class="recipe-name-area">
+            <h2 class="recipe-name">Recipe Name</h2>
+          </article>
+        </article>
       </section>
     </main>
   </body>

@@ -1,5 +1,136 @@
 html {
   background-color: #37515C;
+  height: 100%;
+}
+
+body {
+}
+
+main {
+}
+
+.main-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background-color: #EBF5EE;
+}
+
+.hamburger-menu {
+  height: 4rem;
+  width: 4rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.x-menu {
+  height: 4rem;
+  width: 4rem;
+}
+
+.open-menu-title {
+  grid-column-start: 3;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+.open-menu-selections {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  background-color: #EBF5EE;
+}
+
+.menu-selection {
+  grid-column-start: 2;
+  border-bottom: solid;
+  text-align: center;
+}
+
+.menu-favorites {
+  border: none;
+}
+
+/* .menu-my-upcoming-recipes {
+  grid-column-start: 2;
+  grid-column-end: 3;
+} */
+
+.all-recipes-title {
+  text-align: center;
+}
+
+.search-recipes-input {
+  height: 1.5rem;
+  width: 8rem;
+}
+
+.search-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.shadow {
+  opacity: 0.15;
+}
+/* to be used on .main and 
+.all-recipes-and-search 
+when menu is open*/
+
+.all-recipe-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 2rem;
+  margin: 2rem;
+}
+
+.single-recipe-card {
+  display: grid;
+  grid-template-rows: 0.25fr 3fr 0.5fr;
+  background-color: #D7F2FE;
+}
+
+.card-image {
+  width: 100%;
+  height:auto;
+}
+
+.all-card-icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-icon {
+  height: 2rem;
+  width: 2rem;
+  border: solid;
+}
+
+.recipe-name-area {
+
+}
+
+.recipe-name {
+  text-align: center;
+}
+
+
+
+@media screen and (min-width: 760px) {
+html {
+  background-color: #37515C;
   border: 2px solid #000;
   height: 100vh;
 }
@@ -116,7 +247,7 @@ h1 {
   width: 13%;
 }
 
-.all-cards {
+.all-recipe-cards {
   display: grid;
   grid-gap: 30px;
   grid-template-columns: repeat(4, 1fr);
@@ -128,7 +259,7 @@ img {
   cursor: pointer;
 }
 
-.card {
+.single-recipe-card {
   background-color: #D7F2FE;
   border: 3px solid #000;
   width: 100%;
@@ -190,4 +321,5 @@ main {
 .favorite-active {
   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
   background-repeat: no-repeat;
+}
 }
