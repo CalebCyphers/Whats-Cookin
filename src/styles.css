@@ -20,6 +20,15 @@ main {
   width: 4rem;
 }
 
+.hidden {
+  display: none;
+}
+
+.x-menu {
+  height: 4rem;
+  width: 4rem;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
