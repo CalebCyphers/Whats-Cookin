@@ -29,6 +29,10 @@ main {
   width: 4rem;
 }
 
+.open-menu-title {
+  grid-column-start: 3;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -40,6 +44,29 @@ main {
   grid-column-start: 2;
   grid-column-end: 5;
 }
+
+.open-menu-selections {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  background-color: #EBF5EE;
+}
+
+.menu-selection {
+  grid-column-start: 2;
+  border-bottom: solid;
+  text-align: center;
+}
+
+.menu-favorites {
+  border: none;
+}
+
+/* .menu-my-upcoming-recipes {
+  grid-column-start: 2;
+  grid-column-end: 3;
+} */
 
 .all-recipes-title {
   text-align: center;
@@ -54,6 +81,13 @@ main {
   height: 1.5rem;
   width: 1.5rem;
 }
+
+.shadow {
+  opacity: 0.15;
+}
+/* to be used on .main and 
+.all-recipes-and-search 
+when menu is open*/
 
 .all-recipe-cards {
   display: grid;
