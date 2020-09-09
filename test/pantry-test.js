@@ -6,17 +6,18 @@ describe('Pantry', () => {
   let testUserData
   let testIngredientsData
   let testRecipeData
+  let testUser
+  let testPantry
+
 
   beforeEach(() => {
-    testPantry = new Pantry()
-    testUser = new User
     testUserData = {
       "id": 2,
       "name": "Dingus Dangus",
       "pantry": [
         {
           "ingredient": 11,
-          "amount": 5
+          "amount": 1
         },
         {
           "ingredient": 12,
@@ -44,7 +45,12 @@ describe('Pantry', () => {
         "id": 13,
         "name": "eggs",
         "estimatedCostInCents": 472
-      }
+      },
+      {
+        "id": 18372,
+        "name": "bicarbonate of soda",
+        "estimatedCostInCents": 582
+      },
     ]
 
     testRecipeData = [
@@ -99,15 +105,49 @@ describe('Pantry', () => {
         ]
       }
     ]
-  
+
+    testUser = new User(testUserData.id, testUserData.name, testUserData.pantry)
+    testPantry = new Pantry(testUser.pantry)
   });
 
-  
-
-  
 
   it('should be a function', () => {
     expect(Pantry).to.be.a("function")
   });
+
+  it('should contain an array of the user\'s ingredients', () => {
+    let result = testPantry.contents[1].ingredient
+    expect(result).to.deep.equal(testUser.pantry[1].ingredient)
+  });
+
+  it('should be able to tell if the user has the ingredients required to cook a given recipe', () => {
+    let result = testPantry.determineIfUserHasEnoughIngredients(testRecipeData[0])
+    expect(result).to.be.false;
+  });
+
+  it('should determine the amount of ingredients still needed to cook a given meal', () => {
+    let result = testPantry.findAmountMissing(testRecipeData[0]);
+    expect(result).to.equal('You are missing 0.5 of all purpose flour, oh no!');
+  });
+
+  it('should determine how much it will cost to buy the necessary ingredients needed to cook a given meal', () => {
+    let result = testPantry.calculateCostForIngredients(testRecipeData[0]);
+    expect(result).to.equal(71);
+  });
+
+  it('should add the necessary ingredients to my pantry', () => {
+    let result = testPantry.addNecessaryIngredients(testRecipeData[0]);
+    const pantryItem = {
+      "ingredient": 11,
+      "amount": 1
+    }
+
+    expect(result).to.deep.equal(pantryItem);
+  });
+
+  // it('should remove the ingredients used for a given meal from my pantry, once that meal has been cooked', () => {
+  //   let result = testPantry.removeUsedIngredients(testRecipeData[0]);
+  //   expect(result).to.deep.equal()
+  // })
 });
 
