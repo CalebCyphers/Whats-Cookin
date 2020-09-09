@@ -1,29 +1,35 @@
 class Pantry {
   constructor(userIngredients) {
     this.contents = userIngredients;
-    this.filtered
     this.goodAmount;
     this.notEnough = []
   }
 
-  determineIfUserHasEnoughIngredients(recipe) {
-    let AllIngredientInPantryIds = this.contents.map(ing =>{
+  getIdsOfPantryIngredients() {
+    return this.contents.map(ing => {
       return ing.ingredient 
     })
+  }
 
-     this.filtered = recipe.ingredients.filter(ingredient => {
-      return AllIngredientInPantryIds.includes(ingredient.id)
+  findRecipeIngredientsInPantry(recipe) {
+    let currentPantryIds = this.getIdsOfPantryIngredients()
+    console.log(recipe.ingredients)
+    return recipe.ingredients.filter(ingredient => {
+      return currentPantryIds.includes(ingredient.id)
     })
+  }
 
-     this.goodAmount =  this.filtered.filter(ing =>{
-      if (AllIngredientInPantryIds.indexOf(ing.id) > -1) {
-        if (!this.contents[AllIngredientInPantryIds.indexOf(ing.id)].amount >= ing.quantity.amount) {
-          this.notEnough.push(ing)
-        }
-        return this.contents[AllIngredientInPantryIds.indexOf(ing.id)].amount >= ing.quantity.amount
-      }
+  doesUserHaveRequiredIngredients(recipe) {
+    console.log(recipe.ingredients)
+    return this.findRecipeIngredientsInPantry().length === recipe.ingredients.length
+  }
+
+  findWhichIngredientsAreShort() { 
+    let notEnough = this.findRecipeIngredientsInPantry().filter(ing => {
+      let ingredientStock = this.contents[this.getIdsOfPantryIngredients().indexOf(ing.id)].amount
+      return ingredientStock < ing.quantity.amount
     })
-    return this.goodAmount.length === this.filtered.length
+    return notEnough
   }
 
   findAmountMissing(recipe) {
