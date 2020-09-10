@@ -125,9 +125,9 @@ describe('Pantry', () => {
     expect(result.length).to.equal(1);
   });
 
-  it.skip('should determine the amount of ingredients still needed to cook a given meal', () => {
+  it('should determine the amount of ingredients still needed to cook a given meal', () => {
     let result = testPantry.findAmountMissing(testRecipeData[0]);
-    expect(result).to.equal('You are missing 0.5 of all purpose flour, oh no!');
+    expect(result).to.deep.equal([{ name: 'all purpose flour', facts: { id: 11, amountMissing: 0.5 } }]);
   });
 
   it.skip('should determine how much it will cost to buy the necessary ingredients needed to cook a given meal', () => {
