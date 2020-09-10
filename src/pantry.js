@@ -30,7 +30,7 @@ class Pantry {
       return finalArray
     },[])
   }
-  calculateMissingIngredientCost(recipe) {
+  identifyAmountOfIngredientsMissing(recipe) {
     let ingredientsMissing = this.findAmountMissing(recipe)
      return  ingredientsMissing.reduce((string, ingredient )=>{
       string += ` ${ingredient.facts.amountMissing} ${ingredient.name}\n`
