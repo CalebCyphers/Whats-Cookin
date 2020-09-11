@@ -20,8 +20,10 @@ let user, pantry;
 
 // window.onload = onStartup();
 // window.onload = showDomUpdates(recipe);
-window.onload = domUpdates.grabRecipes()
-
+window.onload = function() {
+  domUpdates.grabRecipes()
+  domUpdates.grabUsers()
+}
 // homeButton.addEventListener('click', cardButtonConditionals);
 // favButton.addEventListener('click', viewFavorites);
 // cardArea.addEventListener('click', cardButtonConditionals);
@@ -41,15 +43,16 @@ function displayAllRecipes(recipe) {
      </article>`
 }
 
-function onStartup(userRepo) {
-  let userId = (Math.floor(Math.random() * 49) + 1)
-  let newUser = userRepo[userId]
-  user = new User(userId, newUser.name, newUser.pantry)
-  pantry = new Pantry(newUser.pantry)
-  greetUser(user);
-  displayPantry(pantry)
-}
+// function onStartup(user) {
+  // let pantry = new Pantry(user.pantry)
+  // greetUser(user);
+  // displayPantry(pantry)
+// }
 
+
+// function displayPantry(pantry) {
+// ///change innerHtml on pantry
+// }
 // function viewFavorites() {
 //   if (cardArea.classList.contains('all')) {
 //     cardArea.classList.remove('all')
