@@ -37,7 +37,7 @@ class Pantry {
       return string
     },"You are missing")
   }
-  calculateCostForIngredients(recipe,AllIngredients) {
+  calculateCostForIngredients(recipe, AllIngredients) {
     let allMissing = this.findAmountMissing(recipe)
     return allMissing.reduce((cost, ingredient) =>{
       let currentIng = AllIngredients.find(ing =>{
@@ -45,6 +45,13 @@ class Pantry {
       })
       return currentIng.estimatedCostInCents * ingredient.facts.amountMissing
     }, 0)
+  }
+  addNecessaryIngredients(recipe) {
+   let allMissing =  this.findAmountMissing(recipe)
+   return allMissing.map(ing =>{
+    return {["ingredient"]: ing.facts.id,
+    ["amount"]: ing.facts.amountMissing}
+   }) 
   }
   findIngredientInPantry(ingredient) {
     return this.contents.find(pantryIngredient => {
