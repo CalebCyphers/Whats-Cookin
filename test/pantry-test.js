@@ -121,21 +121,21 @@ describe('Pantry', () => {
   });
 
   it('should be able to tell if the user has the ingredients required to cook a given recipe', () => {
-    let result = testPantry.determineIfUserHasEnoughIngredients(testRecipeData[0])
-    expect(result).to.be.false;
+    let result = testPantry.findWhichIngredientsAreShort(testRecipeData[0])
+    expect(result.length).to.equal(1);
   });
 
   it('should determine the amount of ingredients still needed to cook a given meal', () => {
     let result = testPantry.findAmountMissing(testRecipeData[0]);
-    expect(result).to.equal('You are missing 0.5 of all purpose flour, oh no!');
+    expect(result).to.deep.equal([{ name: 'all purpose flour', facts: { id: 11, amountMissing: 0.5 } }]);
   });
 
-  it('should determine how much it will cost to buy the necessary ingredients needed to cook a given meal', () => {
+  it.skip('should determine how much it will cost to buy the necessary ingredients needed to cook a given meal', () => {
     let result = testPantry.calculateCostForIngredients(testRecipeData[0]);
     expect(result).to.equal(71);
   });
 
-  it('should add the necessary ingredients to my pantry', () => {
+  it.skip('should add the necessary ingredients to my pantry', () => {
     let result = testPantry.addNecessaryIngredients(testRecipeData[0]);
     const pantryItem = {
       "ingredient": 11,
