@@ -130,24 +130,21 @@ describe('Pantry', () => {
     expect(result).to.deep.equal([{ name: 'all purpose flour', facts: { id: 11, amountMissing: 0.5 } }]);
   });
 
-  it.skip('should determine how much it will cost to buy the necessary ingredients needed to cook a given meal', () => {
-    let result = testPantry.calculateCostForIngredients(testRecipeData[0]);
+  it('should determine how much it will cost to buy the necessary ingredients needed to cook a given meal', () => {
+    let result = testPantry.calculateCostForIngredients(testRecipeData[0], testIngredientsData);
     expect(result).to.equal(71);
   });
 
-  it.skip('should add the necessary ingredients to my pantry', () => {
+  it('should add the necessary ingredients to my pantry', () => {
     let result = testPantry.addNecessaryIngredients(testRecipeData[0]);
-    const pantryItem = {
+    const pantryItem = [{
       "ingredient": 11,
-      "amount": 1
-    }
+      "amount": .5
+    }]
 
     expect(result).to.deep.equal(pantryItem);
   });
 
-  // it('should remove the ingredients used for a given meal from my pantry, once that meal has been cooked', () => {
-  //   let result = testPantry.removeUsedIngredients(testRecipeData[0]);
-  //   expect(result).to.deep.equal()
-  // })
+  
 });
 
