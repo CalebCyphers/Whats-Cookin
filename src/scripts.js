@@ -9,6 +9,7 @@ import Pantry from './pantry';
 import Recipe from './recipe';
 import User from './user';
 import Cookbook from './cookbook';
+import domUpdates from './domUpdates';
 
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
