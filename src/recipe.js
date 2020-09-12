@@ -27,7 +27,6 @@ class Recipe {
     var tags =  this.tags.filter(tag =>{
       return tag.split('').includes(letter.toLowerCase())
     })
-    console.log(tags)
     return tags
   }
   containsIngredient(inputIngredient) { 
