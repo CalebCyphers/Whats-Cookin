@@ -5,37 +5,38 @@
     <title>Whats Cookin</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap' rel='stylesheet'>
     <link rel="stylesheet" href="./pantry.html">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
   </head>
   <body>
     <section class="user-info">
-      <h1>Hi, I'm John</h1>
+      <p>Hi, I'm John</p>
       </section>
     <header class='main-header'>
       <div class="wrapper">
         <img class="hamburger-menu" src="./images/hamburger-icon.png" alt="hamburger icon serving as menu button">
-        <img class="x-menu x" src="./images/x-icon.png" alt="x icon to be clicked when you are done viewing the menu options">
+        <img class="x-menu hidden" src="./images/x-icon.png" alt="x icon to be clicked when you are done viewing the menu options">
       </div>
       <h1 class="header-title">What's Cookin'?</h1>
-      <h1 class="open-menu-title x">Menu</h1>
       <div class="spacer"></div>
     </header>
-    <section class="open-menu-selections x">
-      <article class="menu-my-pantry menu-selection x">
+    <section class="open-menu-selections hidden">
+      <article class="menu-my-pantry menu-selection hidden">
         <h3 class="menu-my-pantry-title">My Pantry</h2>
       </article>
-      <article class="menu-my-upcoming-recipes menu-selection x">
+      <article class="menu-my-upcoming-recipes menu-selection hidden">
         <h3 class="menu-my-upcoming-recipes-title">My Upcoming Recipes</h2>
       </article>
-      <article class="menu-favorites menu-selection x">
+      <article class="menu-favorites menu-selection hidden">
         <h3 class="menu-favorites-title">Favorites</h2>
       </article>
     </section>
     <section class="page-title-and-search">
-      <h1 class="page-title">All Recipes</h1>
+      <h3 class="page-title">All Recipes</h3>
       <section class="search-recipes">
         <div class="search-wrapper">
-          <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+          <button class="search-button">
+            <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+          </button>
           <input class="search-recipes-input" type="text" placeholder="search recipes">
         </div>
       </section>
