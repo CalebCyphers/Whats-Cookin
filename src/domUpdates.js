@@ -10,20 +10,54 @@ let domUpdates = {
     })
     .catch(err => {
       console.log(err);
-      alert('Sorry, we could not load the recipes at this time.')})
+      alert('Sorry, the recipes failed to load. Try again later.')})
   },
 
   grabUsers() {
-    fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData',)
+    return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData',)
     .then(response => {
       return response.json()
     })
     .then(data => {
-        let currentUser = data.wcUsersData.find(user => user.id === (Math.floor(Math.random() * 49) + 1))
-    })
+       return data.wcUsersData;
+        })
     .catch(err => {
         console.log(err);
         alert('Sorry, the user information failed to load. Try again later.');
     })
+  },
+
+    grabIngredients() {
+    return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/ingredients/ingredientsData')
+    .then(response => {
+        return response.json()
+    }).then(ingredientData => {
+        return ingredientData.ingredientsData;
+        })
+    .catch(err => {
+        console.log(err);
+        alert('Sorry, the ingredients failed to load. Try again later.');    
+  })
+},
+
+mergeFetchTimelines() {
+   Promise.all([domUpdates.grabUsers(), domUpdates.grabIngredients()])
+   .then(values => {
+       let randomNumber = Math.floor(Math.random() * 49) + 1;
+        let currentUser = values[0].find(user => {
+            let parsedID = parseInt(user.id);
+            return parsedID === randomNumber})
+        currentUser.pantry.forEach(pantryItem => {
+        let currentIngredient = values[1].find(ingredient => {
+            return pantryItem.ingredient === ingredient.id;
+        })
+        pantryItem.name = currentIngredient.name;
+        pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents; 
+   })
+    }).catch(err => {
+        console.log(err);
+        alert('Sorry, the information failed to load. Try again later.');
+    })
   }
-};
+}
+
