@@ -114,7 +114,9 @@ h1 {
   width: 1.5rem;
   margin: 10px 0px 10px 0px;
 }
-
+.search-icon{
+  width: 100px;
+}
 .all-recipes-and-search .search-wrapper .search-recipes-input {
   height: 1.5rem;
   width: 8rem;
