@@ -14,7 +14,7 @@
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
-const recipeCards = document.querySelector('.all-recipe-cards');
+const recipeCards = document.querySelector('.all-cards');
 // let cookbook = new Cookbook(recipeData);
 let user, pantry;
 
@@ -22,7 +22,8 @@ let user, pantry;
 // window.onload = showDomUpdates(recipe);
 window.onload = function() {
   domUpdates.grabRecipes()
-  domUpdates.grabUsers()
+  // domUpdates.grabUsers()
+  domUpdates.mergeFetchTimelines()
 }
 // homeButton.addEventListener('click', cardButtonConditionals);
 // favButton.addEventListener('click', viewFavorites);
@@ -85,11 +86,11 @@ function displayAllRecipes(recipe) {
 //   }
 // }
 
-function greetUser(user) {
-  const userName = document.querySelector('.user-name');
-  userName.innerHTML =
-  user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
-}
+// function greetUser(user) {
+//   const userName = document.querySelector('.user-name');
+//   userName.innerHTML =
+//   user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
+// }
 
 // function favoriteCard(event) {
 //   let specificRecipe = cookbook.recipes.find(recipe => {
