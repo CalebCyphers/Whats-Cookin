@@ -19,6 +19,7 @@ let domUpdates = {
       return response.json()
     })
     .then(data => {
+      greetUser(data.wcUsersData[0])
        return data.wcUsersData;
         })
     .catch(err => {
@@ -43,16 +44,19 @@ let domUpdates = {
 mergeFetchTimelines() {
    Promise.all([domUpdates.grabUsers(), domUpdates.grabIngredients()])
    .then(values => {
+     let usersData = values[0]
+     let ingredientsData = values[1]
        let randomNumber = Math.floor(Math.random() * 49) + 1;
-        let currentUser = values[0].find(user => {
+        let currentUser = usersData.find(user => {
             let parsedID = parseInt(user.id);
             return parsedID === randomNumber})
         currentUser.pantry.forEach(pantryItem => {
-        let currentIngredient = values[1].find(ingredient => {
+        let currentIngredient = ingredientsData.find(ingredient => {
             return pantryItem.ingredient === ingredient.id;
         })
         pantryItem.name = currentIngredient.name;
         pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents; 
+        displayPantry()
    })
     }).catch(err => {
         console.log(err);
