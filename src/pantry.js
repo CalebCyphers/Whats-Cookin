@@ -25,7 +25,7 @@ class Pantry {
   }
   findAmountMissing(recipe) {
     let missingIngredients = this.findWhichIngredientsAreShort(recipe)
-   return missingIngredients.reduce((finalArray, ingredient) => {
+  return missingIngredients.reduce((finalArray, ingredient) => {
       finalArray.push({ name: ingredient.name, facts: { id: ingredient.id, amountMissing: ingredient.quantity.amount - this.findIngredientInPantry(ingredient).amount}})
       return finalArray
     },[])
@@ -59,4 +59,4 @@ class Pantry {
     })
   }
 }
-export default Pantry;
+// export default Pantry;
