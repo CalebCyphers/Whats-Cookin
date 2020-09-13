@@ -46,22 +46,29 @@ mergeFetchTimelines() {
    .then(values => {
      let usersData = values[0]
      let ingredientsData = values[1]
-       let randomNumber = Math.floor(Math.random() * 49) + 1;
-        let currentUser = usersData.find(user => {
-            let parsedID = parseInt(user.id);
-            return parsedID === randomNumber})
-        currentUser.pantry.forEach(pantryItem => {
-        let currentIngredient = ingredientsData.find(ingredient => {
-            return pantryItem.ingredient === ingredient.id;
-        })
-        pantryItem.name = currentIngredient.name;
-        pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents; 
+     let pantry = domUpdates.createPantry()
+       
         displayPantry()
    })
     }).catch(err => {
         console.log(err);
         alert('Sorry, the information failed to load. Try again later.');
     })
-  }
+  },
+  createUser(usersData){
+    let randomNumber = Math.floor(Math.random() * 49) + 1;
+    let currentUser = usersData.find(user => {
+        let parsedID = parseInt(user.id);
+        return parsedID === randomNumber})
+        return currentUser
+  },
+  createPantry(currentUser,ingredientsData){
+  currentUser.pantry.forEach(pantryItem => {
+  let currentIngredient = ingredientsData.find(ingredient => {
+      return pantryItem.ingredient === ingredient.id;
+  })
+  pantryItem.name = currentIngredient.name;
+  pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
+}
 }
 
