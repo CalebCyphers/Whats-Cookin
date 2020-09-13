@@ -76,7 +76,7 @@ h1 {
   background-color: $highlight-color;
   
   h3:hover {
-    color: lighten($darkest-color, 50%)
+    color: $secondary-color;
   }
 
   .menu-selection {
