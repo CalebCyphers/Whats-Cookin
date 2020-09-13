@@ -6,10 +6,10 @@ let domUpdates = {
     if (recipeCards === null) {
       return 
     }
-    recipeCards.innerHTML += `<article class="single-recipe-card">
+    recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
          <article class="all-card-icons">
            <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-           <img class="heart-icon card-icon" src="https://image.flaticon.com/icons/svg/149/149222.svg
+           <img class="star-icon card-icon" src="https://image.flaticon.com/icons/svg/149/149222.svg"
           "alt="empty star icon used to favorite and unfavorite recipes">
          </article>
          <article class="card-image-section">
@@ -30,7 +30,7 @@ let domUpdates = {
   },
   
    displayPantry(pantry) {
-    if(pantryArea === null){
+    if(pantryArea === null) {
       return 
     }
     pantry = pantry.contents
@@ -46,7 +46,26 @@ let domUpdates = {
       <button>+</button>
     </article>
   </article>`
-    })
+    });
+  },
+     displayFavorites(favorites) {
+      recipeCards.innerHTML = ''
+      favorites.forEach(recipe =>{
+        recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
+      <article class="all-card-icons">
+        <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
+        <img class="star-icon card-icon" src="https://image.flaticon.com/icons/svg/148/148841.svg"
+       "alt="empty star icon used to favorite and unfavorite recipes">
+      </article>
+      <article class="card-image-section">
+        <img class="card-image" src="${recipe.image}" alt="sample display of recipe">
+      </article>
+      <article class="recipe-name-area">
+        <h2 class="recipe-name">${recipe.name}</h2>
+      </article>
+    </article>`
+      })
+    }
   }
   // function viewFavorites() {
 //   if (cardArea.classList.contains('all')) {
@@ -178,5 +197,4 @@ let domUpdates = {
 //   getFavorites();
 // };
 
-}
 
