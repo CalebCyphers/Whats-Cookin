@@ -18,17 +18,31 @@ const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 // let cookbook = new Cookbook(recipeData);
 let user, pantry;
+let favorites = []
 recipeCards.addEventListener('click', () => {
 if(event.target.classList.contains('star-icon')){
   toogleFavorites(event)
 }
 })
 function toogleFavorites(event){
-  if(  event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
+  if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
     event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
+    addToFavorites(event)
   }else{   
+    removeFromFavorites(event)
     event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" }
 }
+function addToFavorites(event){
+let recipe = event.target.closest('.single-recipe-card')
+favorites.push(recipe.id)
+}
+function removeFromFavorites(event) {
+  let recipe = event.target.closest('.single-recipe-card')
+  if(favorites.includes(recipe.id)){
+    favorites.splice(favorites.indexOf(recipe.id),1)
+  }
+}
+
 // window.onload = onStartup();
 // window.onload = showDomUpdates(recipe);
 window.onload = function() {
