@@ -26,6 +26,26 @@ window.onload = function() {
   // domUpdates.grabUsers()
   domUpdates.mergeFetchTimelines()
 }
+function createUser(usersData) {
+  let currentUser = usersData.find(user => {
+    let parsedID = parseInt(user.id);
+    console.log(domUpdates.randomNumber)
+    return parsedID === domUpdates.randomNumber
+  })
+  return currentUser
+}
+
+function createPantry(currentUser, ingredientsData) {
+  currentUser.pantry.forEach(pantryItem => {
+    let currentIngredient = ingredientsData.find(ingredient => {
+      return pantryItem.ingredient === ingredient.id;
+    })
+    pantryItem.name = currentIngredient.name;
+    pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
+  })
+  //what if we made a class here?
+  return currentUser.pantry
+}
 // homeButton.addEventListener('click', cardButtonConditionals);
 // favButton.addEventListener('click', viewFavorites);
 // cardArea.addEventListener('click', cardButtonConditionals);
