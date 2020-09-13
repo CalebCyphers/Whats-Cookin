@@ -6,7 +6,7 @@ let domUpdates = {
     .then(response => response.json())
     .then(recipeObject => {
       recipeObject.recipeData.forEach(recipe =>{
-       displayAllRecipes(recipe);
+        domUpdates.displayAllRecipes(recipe);
       })
     })
     .catch(err => {
@@ -47,34 +47,59 @@ mergeFetchTimelines() {
    .then(values => {
      let usersData = values[0]
      let ingredientsData = values[1]
-     let currentUser =domUpdates.createUser(usersData)
-     console.log(currentUser)
-     let pantry = domUpdates.createPantry(currentUser,ingredientsData)
-     console.log(pantry)
-        displayPantry(pantry)
+     let currentUser = createUser(usersData)
+     let pantry = createPantry(currentUser,ingredientsData)
+        domUpdates.displayPantry(pantry)
    })
     .catch(err => {
         console.log(err);
         alert('Sorry, the information failed to load. Try again later.');
     })
   },
-  createUser(usersData) {
-    let currentUser = usersData.find(user => {
-        let parsedID = parseInt(user.id);
-        console.log(domUpdates.randomNumber)
-        return parsedID === domUpdates.randomNumber})
-        return currentUser
+   displayAllRecipes(recipe) {
+    if (recipeCards === null) {
+      return 
+    }
+    recipeCards.innerHTML += `<article class="single-recipe-card">
+         <article class="all-card-icons">
+           <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
+           <img class="heart-icon card-icon" src="./images/heart-icon.png" alt="empty heart icon used to favorite and unfavorite recipes">
+         </article>
+         <article class="card-image-section">
+           <img class="card-image" src="${recipe.image}" alt="sample display of recipe">
+         </article>
+         <article class="recipe-name-area">
+           <h2 class="recipe-name">${recipe.name}</h2>
+         </article>
+       </article>`
   },
-  createPantry(currentUser,ingredientsData){
-  currentUser.pantry.forEach(pantryItem => {
-  let currentIngredient = ingredientsData.find(ingredient => {
-      return pantryItem.ingredient === ingredient.id;
-  })
-  pantryItem.name = currentIngredient.name;
-  pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
-  })
-  //what if we made a class here?
-  return currentUser.pantry
+  
+   greetUser(user) {
+    const userName = document.querySelector('.user-name');
+    if(userName === null){
+      return 
+    }
+    userName.innerText += ' ' + user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
+  },
+  
+   displayPantry(pantry) {
+    if(pantryArea === null){
+      return 
+    }
+    pantryArea.innerHTML = ''
+    pantry.forEach(ingInPantry => {
+      pantryArea.innerHTML += `<article class="single-ingredient-card">
+    <article class="ingredient-name-area">
+      <h2 class="ingredient-name">${ingInPantry.name}</h2>
+    </article>
+    <article class="ingredient-quantity-section">
+      <button>-</button>
+      <p class = 'ingredient-quantity'>${ingInPantry.amount}</p>
+      <button>+</button>
+    </article>
+  </article>`
+    })
   }
+  
 }
 
