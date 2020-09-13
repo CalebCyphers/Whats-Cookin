@@ -20,28 +20,31 @@ html {
 }
 
 body {
-  box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
-  margin: auto;
   width: 100%;
 }
 
 h1 {
-  font-size: 255%;
   margin-top: 0;
   margin-bottom: 0;
-  padding-top: 1rem;
+  padding: 1rem;
   text-align: center;
   width: 30%;
 }
 
+.wrapper {
+  @include centerFlex;
+}
 
+.hidden {
+  display: none;
+}
 
 .main-header {
   background-color: $highlight-color;
-  border: 2px solid $darkest-color;
+  border-bottom: 1px solid $darkest-color;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 5fr 1fr;
   background-color: $highlight-color;
   width: 100%;
 
@@ -51,34 +54,37 @@ h1 {
   }
 
   .x-menu {
+    @include centerFlex()
     height: 4rem;
     width: 4rem;
-  }
-
-  .open-menu-title {
-    grid-column-start: 3;
   }
 
   .header-title {
     text-align: center;
     grid-column-start: 2;
-    grid-column-end: 5;
+    width: 100%;
+  }
+
+  .hidden {
+    display: none;
   }
 }
 .open-menu-selections {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: $highlight-color;
+  
+  h3:hover {
+    color: $secondary-color;
+  }
 
   .menu-selection {
+    color: $darkest-color;
     grid-column-start: 2;
     border-bottom: solid;
     text-align: center;
-    background-color: $secondary-color;
-    font-size: 130%;
-    margin: 1%;
+    width: 50%;
   }
 
   .menu-my-pantry {
@@ -96,6 +102,7 @@ h1 {
 
   .page-title {
     text-align: center;
+    margin: auto;
   }
 
   .search-wrapper {
@@ -103,9 +110,8 @@ h1 {
   
   .search-icon {
     display: flex;
-    height: 1.5rem;
-    width: 1.5rem;
-    margin: 10px 0px 10px 0px;
+    height: 1rem;
+    width: 1rem;
   }
 
   .search-recipes-input {
@@ -113,7 +119,13 @@ h1 {
     width: 8rem;
     background-color: $highlight-color;
     border: 1px solid $darkest-color;
-    margin-top: 0.1rem;
+  }
+
+  .search-button {
+    @include centerFlex()
+    height: 1.75rem;
+    width: 1.75rem;
+    border: 1px solid $darkest-color;
   }
 }
 
@@ -124,11 +136,11 @@ h1 {
 }
 
 .all-cards {
+  padding: 2rem;
   display: grid;
   grid-gap: 1.5rem;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-  width: 95%;
+  grid-template-columns: 1fr;
+  width: 100%;
 }
 
 .single-recipe-card {
@@ -138,7 +150,9 @@ h1 {
 
   .all-card-icons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
   }
 
   .card-icon {
@@ -154,26 +168,28 @@ h1 {
     text-align: center;
   }
 
+  .card-image-section {
+    @include centerFlex()
+  }
+
   .card-image {
     border: 1px solid $darkest-color;
-    height: 200px;
-    margin: 10px 3% 8px 2.6%;
-    width: 94%;
+    width: 93%;
+    height: auto;
   }
 }
 
 
 .user-info {
-  font-size: 180%;
   margin: auto;
   text-align: center;
-  width: 40%
+  width: 40%;
 }
 
 
 .menu-selection:hover,
 .search-icon:hover {
-  background-color: $primary-color;
+  cursor: pointer;
 }
 
 
@@ -199,10 +215,6 @@ h1 {
 
 .add {
   width: 100%;
-}
-
-.hidden {
-  display: none;
 }
 
 
@@ -233,8 +245,8 @@ ol {
 }
 
 h3 {
-  color: $highlight-color;
-  font-size: 250%;
+  padding: 1rem 0 1rem 0;
+  color: $darkest-color;
 }
 
 .recipe-name {
@@ -252,8 +264,9 @@ h3 {
 }
 
 main {
+  @include centerFlex()
   background-color: #37515C;
-  height: 100%;
+  height: auto;
   width: 100%;
 }
 

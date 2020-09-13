@@ -8,34 +8,34 @@
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <section class="user-info">
-      <h1 class='user-name'> Welcome</h1>
-      </section>
     <header class='main-header'>
       <div class="wrapper">
         <img class="hamburger-menu" src="./images/hamburger-icon.png" alt="hamburger icon serving as menu button">
-        <img class="x-menu x" src="./images/x-icon.png" alt="x icon to be clicked when you are done viewing the menu options">
+        <img class="x-menu hidden" src="./images/x-icon.png" alt="x icon to be clicked when you are done viewing the menu options">
       </div>
       <h1 class="header-title">What's Cookin'?</h1>
-      <h1 class="open-menu-title x">Menu</h1>
-      <div class="spacer"></div>
+      <section class="user-info">
+       <h1 class='user-name'> Welcome</h1>
+      </section>
     </header>
     <section class="open-menu-selections x">
       <article class="menu-my-pantry menu-selection x">
         <h2 class="menu-my-pantry-title"><a href="./pantry.html">My Pantry</a></h2>
       </article>
-      <article class="menu-my-upcoming-recipes menu-selection x">
+      <article class="menu-my-upcoming-recipes menu-selection hidden">
         <h3 class="menu-my-upcoming-recipes-title">My Upcoming Recipes</h2>
       </article>
-      <article class="menu-favorites menu-selection x">
+      <article class="menu-favorites menu-selection hidden">
         <h3 class="menu-favorites-title">Favorites</h2>
       </article>
     </section>
     <section class="page-title-and-search">
-      <h1 class="page-title">All Recipes</h1>
+      <h3 class="page-title">All Recipes</h3>
       <section class="search-recipes">
         <div class="search-wrapper">
-          <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+          <button class="search-button">
+            <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+          </button>
           <input class="search-recipes-input" type="text" placeholder="search recipes">
         </div>
       </section>
@@ -45,8 +45,7 @@
         <!-- <article class="single-recipe-card">
           <article class="all-card-icons">
             <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-            <!-- <img class="heart-icon card-icon" src="./images/heart-icon.png" alt="empty heart icon used to favorite and unfavorite recipes"> -->
-            <!-- <div class="favorite"><div>
+            <div class="favorite card-icon"><div>
           </article>
           <article class="card-image-section">
             <img class="card-image" src="https://www.onceuponachef.com/images/2018/03/Breakfast-Burritos.jpg" alt="sample display of breakfast burritos">
