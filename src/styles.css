@@ -13,29 +13,41 @@ html {
 }
 
 body {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
-  margin: auto;
   width: 100%;
 }
 
 h1 {
-  font-size: 255%;
   margin-top: 0;
   margin-bottom: 0;
-  padding-top: 1rem;
+  padding: 1rem;
   text-align: center;
   width: 30%;
 }
 
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
 .main-header {
   background-color: #EBF5EE;
-  border: 2px solid #000;
+  border-bottom: 1px solid #000;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 5fr 1fr;
+      grid-template-columns: 1fr 5fr 1fr;
   background-color: #EBF5EE;
   width: 100%;
 }
@@ -46,55 +58,67 @@ h1 {
 }
 
 .main-header .x-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 4rem;
   width: 4rem;
-}
-
-.main-header .open-menu-title {
-  -ms-grid-column: 3;
-      grid-column-start: 3;
 }
 
 .main-header .header-title {
   text-align: center;
   -ms-grid-column: 2;
       grid-column-start: 2;
-  grid-column-end: 5;
+  width: 100%;
+}
+
+.main-header .hidden {
+  display: none;
 }
 
 .open-menu-selections {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   background-color: #EBF5EE;
 }
 
+.open-menu-selections h3:hover {
+  color: gray;
+}
+
 .open-menu-selections .menu-selection {
+  color: #000;
   -ms-grid-column: 2;
       grid-column-start: 2;
   border-bottom: solid;
   text-align: center;
-  background-color: #37515C;
-  font-size: 130%;
-  margin: 1%;
+  width: 50%;
 }
 
 .open-menu-selections .menu-favorites {
   border: none;
 }
 
-.all-recipes-and-search .all-recipes-title {
+.page-title-and-search .page-title {
   text-align: center;
+  margin: auto;
 }
 
-.all-recipes-and-search .search-wrapper {
+.page-title-and-search .search-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -106,36 +130,49 @@ h1 {
           align-items: center;
 }
 
-.all-recipes-and-search .search-wrapper .search-icon {
+.page-title-and-search .search-wrapper .search-icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 1.5rem;
-  width: 1.5rem;
-  margin: 10px 0px 10px 0px;
+  height: 1rem;
+  width: 1rem;
 }
 
-.all-recipes-and-search .search-wrapper .search-recipes-input {
+.page-title-and-search .search-wrapper .search-recipes-input {
   height: 1.5rem;
   width: 8rem;
   background-color: #EBF5EE;
   border: 1px solid #000;
-  margin-top: 0.1rem;
 }
 
-.all-recipes-and-search .search-icon {
+.page-title-and-search .search-wrapper .search-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 1.75rem;
+  width: 1.75rem;
+  border: 1px solid #000;
+}
+
+.page-title-and-search .search-icon {
   height: 1.5rem;
   width: 1.5rem;
 }
 
 .all-cards {
+  padding: 2rem;
   display: -ms-grid;
   display: grid;
   grid-gap: 1.5rem;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
-  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-  width: 95%;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  width: 100%;
 }
 
 .single-recipe-card {
@@ -150,8 +187,11 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 90%;
+  margin: auto;
 }
 
 .single-recipe-card .card-icon {
@@ -163,15 +203,25 @@ h1 {
   text-align: center;
 }
 
+.single-recipe-card .card-image-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .single-recipe-card .card-image {
   border: 1px solid #000;
-  height: 200px;
-  margin: 10px 3% 8px 2.6%;
-  width: 94%;
+  width: 93%;
+  height: auto;
 }
 
 .user-info {
-  font-size: 180%;
   margin: auto;
   text-align: center;
   width: 40%;
@@ -179,7 +229,7 @@ h1 {
 
 .menu-selection:hover,
 .search-icon:hover {
-  background-color: #cff2da;
+  cursor: pointer;
 }
 
 .menu-selection:active,
@@ -203,10 +253,6 @@ h1 {
 
 .add {
   width: 100%;
-}
-
-.hidden {
-  display: none;
 }
 
 .favorite {
@@ -237,8 +283,8 @@ ol {
 }
 
 h3 {
-  color: #EBF5EE;
-  font-size: 250%;
+  padding: 1rem 0 1rem 0;
+  color: #000;
 }
 
 .recipe-name {
@@ -256,8 +302,17 @@ h3 {
 }
 
 main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #37515C;
-  height: 100%;
+  height: auto;
   width: 100%;
 }
 
@@ -265,3 +320,4 @@ main {
   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
   background-repeat: no-repeat;
 }
+/*# sourceMappingURL=styles.css.map */
