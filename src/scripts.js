@@ -37,7 +37,7 @@ function displayAllRecipes(recipe) {
   recipeCards.innerHTML += `<article class="single-recipe-card">
        <article class="all-card-icons">
          <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-         <img class="heart-icon card-icon" src="./images/heart-icon.png" alt="empty heart icon used to favorite and unfavorite recipes">
+         <div class="favorite card-icon" alt="empty star icon used to favorite and unfavorite recipes"><div>
        </article>
        <article class="card-image-section">
          <img class="card-image" src="${recipe.image}" alt="sample display of recipe">
