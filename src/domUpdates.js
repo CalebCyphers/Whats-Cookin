@@ -2,15 +2,21 @@ let domUpdates = {
   randomNumber :  Math.floor(Math.random() * 49) + 1,
 
   
-   displayAllRecipes(recipes) {
+   displayAllRecipes(recipes,favorites) {
+     
     if (recipeCards === null) {
       return 
-    }recipes.forEach(recipe => {
-
+    }
+    recipeCards.innerHTML = ''
+    recipes.forEach(recipe => {
+      let src = "https://image.flaticon.com/icons/svg/149/149222.svg"
+      if (favorites.includes(String(recipe.id))) {
+         src = "https://image.flaticon.com/icons/svg/148/148841.svg"
+      }
     recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
          <article class="all-card-icons">
            <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-           <img class="star-icon card-icon" src="https://image.flaticon.com/icons/svg/149/149222.svg"
+           <img class="star-icon card-icon" src=${src}
           "alt="empty star icon used to favorite and unfavorite recipes">
          </article>
          <article class="card-image-section">
