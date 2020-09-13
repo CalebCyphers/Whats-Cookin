@@ -10,15 +10,18 @@
 // import User from './user';
 // import Cookbook from './cookbook';
 // import domUpdates from './domUpdates';
-
+let favorites = []
+let recipeData;
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
 const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 // let cookbook = new Cookbook(recipeData);
+favButton.addEventListener('click', ()=>{
+  domUpdates.displayFavorites(findFavorites(favorites,recipeData))
+})
 let user, pantry;
-let favorites = []
 recipeCards.addEventListener('click', () => {
 if(event.target.classList.contains('star-icon')){
   toogleFavorites(event)
@@ -28,6 +31,7 @@ function toogleFavorites(event){
   if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
     event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
     addToFavorites(event)
+    console.log(favorites)
   }else{   
     removeFromFavorites(event)
     event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" }
@@ -35,6 +39,7 @@ function toogleFavorites(event){
 function addToFavorites(event){
 let recipe = event.target.closest('.single-recipe-card')
 favorites.push(recipe.id)
+console.log(favorites)
 }
 function removeFromFavorites(event) {
   let recipe = event.target.closest('.single-recipe-card')
@@ -64,7 +69,10 @@ function createPantry(currentUser, ingredientsData) {
     let currentIngredient = ingredientsData.find(ingredient => {
       return pantryItem.ingredient === ingredient.id;
     })
-    pantryItem.name = currentIngredient.name;
+    if(!pantryItem.name){
+      return
+    }
+     pantryItem.name = currentIngredient.name;
     pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
   })
   //what if we made a class here?
@@ -77,6 +85,7 @@ function grabRecipes() {
     recipeObject.recipeData.forEach(recipe =>{
       domUpdates.displayAllRecipes(recipe);
     })
+    recipeData = recipeObject.recipeData
   })
   .catch(err => {
     console.log(err);
@@ -123,6 +132,14 @@ function mergeFetchTimelines() {
       console.log(err);
       alert('Sorry, the information failed to load. Try again later.');
   })
+  
+}
+function findFavorites(ids,recipeData) {
+  favoriteRecipies = recipeData.filter(recipe =>{
+    return ids.includes(String(recipe.id))
+  })
+  console.log(favoriteRecipies)
+  return favoriteRecipies
 }
 
 
