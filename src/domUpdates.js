@@ -1,5 +1,6 @@
 let domUpdates = {
-  
+  randomNumber :  Math.floor(Math.random() * 49) + 1,
+
   grabRecipes() {
     fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
     .then(response => response.json())
@@ -19,7 +20,8 @@ let domUpdates = {
       return response.json()
     })
     .then(data => {
-      greetUser(data.wcUsersData[0])
+      console.log(domUpdates.randomNumber)
+      greetUser(data.wcUsersData[domUpdates.randomNumber -1])
        return data.wcUsersData;
         })
     .catch(err => {
@@ -39,27 +41,26 @@ let domUpdates = {
         console.log(err);
         alert('Sorry, the ingredients failed to load. Try again later.');    
   })
-},
-
+ },
 mergeFetchTimelines() {
    Promise.all([domUpdates.grabUsers(), domUpdates.grabIngredients()])
    .then(values => {
      let usersData = values[0]
      let ingredientsData = values[1]
-     let pantry = domUpdates.createPantry()
-       
-        displayPantry()
+     let currentUser =domUpdates.createUser(usersData)
+     let pantry = domUpdates.createPantry(currentUser,ingredientsData)
+        displayPantry(pantry)
    })
-    }).catch(err => {
+    .catch(err => {
         console.log(err);
         alert('Sorry, the information failed to load. Try again later.');
     })
   },
-  createUser(usersData){
-    let randomNumber = Math.floor(Math.random() * 49) + 1;
+  createUser(usersData) {
     let currentUser = usersData.find(user => {
         let parsedID = parseInt(user.id);
-        return parsedID === randomNumber})
+        console.log(domUpdates.randomNumber)
+        return parsedID === domUpdates.randomNumber})
         return currentUser
   },
   createPantry(currentUser,ingredientsData){
@@ -69,6 +70,8 @@ mergeFetchTimelines() {
   })
   pantryItem.name = currentIngredient.name;
   pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
-}
+  return new Pantry(currentUser.pantry)
+  })
+  }
 }
 
