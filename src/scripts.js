@@ -18,7 +18,17 @@ const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 // let cookbook = new Cookbook(recipeData);
 let user, pantry;
-
+recipeCards.addEventListener('click', () => {
+if(event.target.classList.contains('star-icon')){
+  toogleFavorites(event)
+}
+})
+function toogleFavorites(event){
+  if(  event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
+    event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
+  }else{   
+    event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" }
+}
 // window.onload = onStartup();
 // window.onload = showDomUpdates(recipe);
 window.onload = function() {
