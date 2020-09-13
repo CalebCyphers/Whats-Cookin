@@ -1,4 +1,3 @@
-// import './css/base.scss';
 // import './css/styles.scss';
 
 // import recipeData from './data/recipes';
