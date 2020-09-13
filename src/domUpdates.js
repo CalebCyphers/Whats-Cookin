@@ -48,7 +48,9 @@ mergeFetchTimelines() {
      let usersData = values[0]
      let ingredientsData = values[1]
      let currentUser =domUpdates.createUser(usersData)
+     console.log(currentUser)
      let pantry = domUpdates.createPantry(currentUser,ingredientsData)
+     console.log(pantry)
         displayPantry(pantry)
    })
     .catch(err => {
@@ -70,8 +72,9 @@ mergeFetchTimelines() {
   })
   pantryItem.name = currentIngredient.name;
   pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
-  return new Pantry(currentUser.pantry)
   })
+  //what if we made a class here?
+  return currentUser.pantry
   }
 }
 

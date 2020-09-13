@@ -15,6 +15,7 @@ let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
 const recipeCards = document.querySelector('.all-cards');
+let pantryArea = document.querySelector('.pantry-cards');
 // let cookbook = new Cookbook(recipeData);
 let user, pantry;
 
@@ -30,6 +31,9 @@ window.onload = function() {
 // cardArea.addEventListener('click', cardButtonConditionals);
 
 function displayAllRecipes(recipe) {
+  if (recipeCards === null) {
+    return 
+  }
   recipeCards.innerHTML += `<article class="single-recipe-card">
        <article class="all-card-icons">
          <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
@@ -44,11 +48,10 @@ function displayAllRecipes(recipe) {
      </article>`
 }
 
-// function onStartup(user) {
-  // let pantry = new Pantry(user.pantry)
-  // greetUser(user);
-  // displayPantry(pantry)
-// }
+function onStartup(user) {
+  greetUser(user);
+  displayPantry(pantry)
+}
 
 
 // function displayPantry(pantry) {
@@ -86,11 +89,32 @@ function displayAllRecipes(recipe) {
 //   }
 // }
 
-// function greetUser(user) {
-//   const userName = document.querySelector('.user-name');
-//   userName.innerHTML =
-//   user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
-// }
+function greetUser(user) {
+  const userName = document.querySelector('.user-name');
+  if(userName === null){
+    return 
+  }
+  userName.innerText += ' ' + user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
+}
+
+function displayPantry(pantry) {
+  if(pantryArea === null){
+    return 
+  }
+  pantryArea.innerHTML = ''
+  pantry.forEach(ingInPantry => {
+    pantryArea.innerHTML += `<article class="single-ingredient-card">
+  <article class="ingredient-name-area">
+    <h2 class="ingredient-name">${ingInPantry.name}</h2>
+  </article>
+  <article class="ingredient-quantity-section">
+    <button>-</button>
+    <p class = 'ingredient-quantity'>${ingInPantry.amount}</p>
+    <button>+</button>
+  </article>
+</article>`
+  })
+}
 
 // function favoriteCard(event) {
 //   let specificRecipe = cookbook.recipes.find(recipe => {

@@ -59,4 +59,4 @@ class Pantry {
     })
   }
 }
-export default Pantry;
+// export default Pantry;
