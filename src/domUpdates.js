@@ -2,10 +2,11 @@ let domUpdates = {
   randomNumber :  Math.floor(Math.random() * 49) + 1,
 
   
-   displayAllRecipes(recipe) {
+   displayAllRecipes(recipes) {
     if (recipeCards === null) {
       return 
-    }
+    }recipes.forEach(recipe => {
+
     recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
          <article class="all-card-icons">
            <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
@@ -19,6 +20,8 @@ let domUpdates = {
            <h2 class="recipe-name">${recipe.name}</h2>
          </article>
        </article>`
+      })
+
   },
   
    greetUser(user) {
@@ -49,6 +52,9 @@ let domUpdates = {
     });
   },
      displayFavorites(favorites) {
+       if(favorites.length === 0) {
+         return
+       }
       recipeCards.innerHTML = ''
       favorites.forEach(recipe =>{
         recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">

@@ -19,9 +19,18 @@ const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 // let cookbook = new Cookbook(recipeData);
 favButton.addEventListener('click', ()=>{
+  if(!favButton.classList.contains('clicked')){
   domUpdates.displayFavorites(findFavorites(favorites,recipeData))
+  favButton.classList.add('clicked')
+  }
+  else{
+    favButton.classList.remove('clicked')
+    displayAllRecipes(recipeData)
+  }
 })
 let user, pantry;
+
+
 recipeCards.addEventListener('click', () => {
 if(event.target.classList.contains('star-icon')){
   toogleFavorites(event)
@@ -82,10 +91,8 @@ function grabRecipes() {
   fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
   .then(response => response.json())
   .then(recipeObject => {
-    recipeObject.recipeData.forEach(recipe =>{
-      domUpdates.displayAllRecipes(recipe);
-    })
     recipeData = recipeObject.recipeData
+      domUpdates.displayAllRecipes(recipeData);
   })
   .catch(err => {
     console.log(err);
@@ -135,6 +142,7 @@ function mergeFetchTimelines() {
   
 }
 function findFavorites(ids,recipeData) {
+ 
   favoriteRecipies = recipeData.filter(recipe =>{
     return ids.includes(String(recipe.id))
   })
