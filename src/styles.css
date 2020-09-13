@@ -222,8 +222,10 @@ h1 {
 }
 
 .user-info {
+  white-space: nowrap;
+  font-size: 180%;
   margin: auto;
-  text-align: center;
+  text-align: left;
   width: 40%;
 }
 
