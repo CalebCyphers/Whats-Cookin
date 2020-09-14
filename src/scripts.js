@@ -12,12 +12,17 @@
 // import domUpdates from './domUpdates';
 let favorites = []
 let recipeData;
+let ingredientsData;
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
 const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
+let recipeSearch = document.querySelector('.search-recipes-input')
 // let cookbook = new Cookbook(recipeData);
+recipeSearch.addEventListener('keyup', ()=>{
+  domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),favorites)
+})
 favButton.addEventListener('click', ()=>{
   if(!favButton.classList.contains('clicked')){
   domUpdates.displayFavorites(findFavorites(favorites,recipeData))
@@ -25,7 +30,7 @@ favButton.addEventListener('click', ()=>{
   }
   else{
     favButton.classList.remove('clicked')
-    displayAllRecipes(recipeData)
+    domUpdates.displayAllRecipes(recipeData,favorites)
   }
 })
 let user, pantry;
@@ -92,7 +97,7 @@ function grabRecipes() {
   .then(response => response.json())
   .then(recipeObject => {
     recipeData = recipeObject.recipeData
-      domUpdates.displayAllRecipes(recipeData);
+      domUpdates.displayAllRecipes(recipeData,favorites);
   })
   .catch(err => {
     console.log(err);
@@ -129,8 +134,9 @@ function grabUsers() {
 function mergeFetchTimelines() {
  Promise.all([grabUsers(), grabIngredients()])
  .then(values => {
+   console.log(values[1])
    let usersData = values[0]
-   let ingredientsData = values[1]
+   ingredientsData = values[1]
    let currentUser = createUser(usersData)
    let pantry = createPantry(currentUser,ingredientsData)
       domUpdates.displayPantry(pantry)
@@ -148,6 +154,17 @@ function findFavorites(ids,recipeData) {
   })
   console.log(favoriteRecipies)
   return favoriteRecipies
+}
+function filterInputs(letters,ingredientsData){
+  return recipeData.filter(recipe=>{
+    let correctIngredient  = ingredientsData.find(ingredient =>{ 
+      return recipe.ingredients.find(recIngredients => {
+        return recIngredients.id === ingredient.id
+      })
+     } )
+     
+    return correctIngredient.name.toUpperCase().includes(letters.toUpperCase())
+  })
 }
 
 
