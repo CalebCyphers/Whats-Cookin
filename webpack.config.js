@@ -35,7 +35,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    })
+    }),
+    // new HtmlWebpackPlugin({
+    //   template: './src/pantry.html'
+    // })
   ],
   devServer: {
          contentBase: './dist'
