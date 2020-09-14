@@ -36,9 +36,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    // new HtmlWebpackPlugin({
-    //   template: './src/pantry.html'
-    // })
+    new HtmlWebpackPlugin({
+      hash: true,
+      title: 'My Awesome application',
+      myPageHeader: 'Settings',
+      template: './src/pantry.html',
+      filename: './pantry.html' 
+  })
   ],
   devServer: {
          contentBase: './dist'
