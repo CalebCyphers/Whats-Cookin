@@ -10,6 +10,7 @@ $darkest-color: #000;
   align-items: center;
 }
 
+
 html {
   display: flex;
   flex-direction: column;
@@ -22,6 +23,25 @@ html {
 body {
   font-family: 'Open Sans', sans-serif;
   width: 100%;
+
+  .recipe-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    width: 100%;
+  }
+
+  .recipe-display-main {
+    position: fixed;
+    left: 10%;
+    top: 5rem;
+    background-color: $highlight-color;
+    height: 30rem;
+    width: 80%;
+    border-radius: 0.5rem;
+  }
 }
 
 h1 {
@@ -54,7 +74,7 @@ h1 {
   }
 
   .x-menu {
-    @include centerFlex()
+    @include centerFlex;
     height: 4rem;
     width: 4rem;
   }
@@ -77,6 +97,17 @@ h1 {
   
   h3:hover {
     color: $secondary-color;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 2rem;
+  }
+  a:visited {
+    color: $darkest-color
+  }
+  a:hover {
+    color: $secondary-color
   }
 
   .menu-selection {
@@ -107,6 +138,7 @@ h1 {
 
   .search-wrapper {
   @include centerFlex;
+
   
   .search-icon {
     display: flex;
@@ -143,15 +175,47 @@ h1 {
   width: 100%;
 }
 
+.pantry-cards {
+  padding: 2rem;
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.single-ingredient-card {
+  display: grid;
+  border-radius: 0.5rem;
+  grid-template-rows: 0.5fr 3.25fr;
+  background-color: $highlight-color;
+
+  .ingredient-name-area {
+    @include centerFlex;
+  }
+
+  .ingredient-quantity-section {
+    @include centerFlex;
+  }
+  
+  p {
+    font-size: 500%;
+    margin: 3rem;
+  }
+}
+
 .single-recipe-card {
   display: grid;
+  border-radius: 0.5rem;
   grid-template-rows: 0.25fr 3fr 0.5fr;
   background-color: $highlight-color;
+  box-shadow: 0 0 3px $darkest-color;
 
   .all-card-icons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 90%;
+    height: 3rem;
     margin: auto;
   }
 
@@ -169,7 +233,7 @@ h1 {
   }
 
   .card-image-section {
-    @include centerFlex()
+    @include centerFlex
   }
 
   .card-image {
@@ -180,12 +244,13 @@ h1 {
 }
 
 
+
+
 .user-info {
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
   width: 40%;
 }
-
 
 .menu-selection:hover,
 .search-icon:hover {
@@ -247,6 +312,7 @@ ol {
 h3 {
   padding: 1rem 0 1rem 0;
   color: $darkest-color;
+  font-size: 2rem;
 }
 
 .recipe-name {
@@ -273,4 +339,16 @@ main {
 .favorite-active {
   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
   background-repeat: no-repeat;
+}
+
+@media (min-width: 800px) {
+  .all-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .all-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

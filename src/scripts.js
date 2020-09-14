@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+// import './css/styles.scss';
+
+// import recipeData from './data/recipes';
+// import ingredientData from './data/ingredients';
+// import users from './data/users';
+
+// import Pantry from './pantry';
+// import Recipe from './recipe';
+// import User from './user';
+// import Cookbook from './cookbook';
+// import domUpdates from './domUpdates';
+
+=======
 import './css/base.scss';
 import './css/styles.scss';
 
@@ -13,6 +27,7 @@ import domUpdates from './domUpdates';
 let favorites = []
 let recipeDatas;
 let ingredientsData;
+>>>>>>> main
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
@@ -70,6 +85,28 @@ window.onload = function() {
   //grabUsers()
   mergeFetchTimelines()
 }
+<<<<<<< HEAD
+// homeButton.addEventListener('click', cardButtonConditionals);
+// favButton.addEventListener('click', viewFavorites);
+// cardArea.addEventListener('click', cardButtonConditionals);
+
+function displayAllRecipes(recipe) {
+  if (recipeCards === null) {
+    return 
+  }
+  recipeCards.innerHTML += `<article class="single-recipe-card">
+       <article class="all-card-icons">
+         <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
+         <div class="favorite card-icon" alt="empty star icon used to favorite and unfavorite recipes"><div>
+       </article>
+       <article class="card-image-section">
+         <img class="card-image" src="${recipe.image}" alt="sample display of recipe">
+       </article>
+       <article class="recipe-name-area">
+         <h2 class="recipe-name">${recipe.name}</h2>
+       </article>
+     </article>`
+=======
 function createUser(usersData) {
   let currentUser = usersData.find(user => {
     let parsedID = parseInt(user.id);
@@ -77,6 +114,7 @@ function createUser(usersData) {
     return parsedID === domUpdates.randomNumber
   })
   return new User(currentUser.id,currentUser.name,currentUser.pantry)
+>>>>>>> main
 }
 
 function createPantry(currentUser, ingredientsData) {
