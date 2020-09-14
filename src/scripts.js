@@ -1,33 +1,18 @@
-<<<<<<< HEAD
-// import './css/styles.scss';
-
-// import recipeData from './data/recipes';
-// import ingredientData from './data/ingredients';
-// import users from './data/users';
-
-// import Pantry from './pantry';
-// import Recipe from './recipe';
-// import User from './user';
-// import Cookbook from './cookbook';
-// import domUpdates from './domUpdates';
-
-=======
 import './css/base.scss';
 import './css/styles.scss';
 
-import recipeData from './data/recipes';
-import ingredientData from './data/ingredients';
-import users from './data/users';
 
 import Pantry from './pantry';
 import Recipe from './recipe';
 import User from './user';
 import Cookbook from './cookbook';
 import domUpdates from './domUpdates';
-let favorites = []
 let recipeDatas;
 let ingredientsData;
->>>>>>> main
+let currentUser;
+let favorites;
+
+let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
@@ -36,77 +21,58 @@ let pantryArea = document.querySelector('.pantry-cards');
 let recipeSearch = document.querySelector('.search-recipes-input')
 // let cookbook = new Cookbook(recipeData);
 recipeSearch.addEventListener('keyup', ()=>{
-  domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),favorites)
+  domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),currentUser)
 })
 favButton.addEventListener('click', ()=>{
-  if(!favButton.classList.contains('clicked')){
-  domUpdates.displayFavorites(findFavorites(favorites,recipeDatas))
-  favButton.classList.add('clicked')
+  if(!favButton.classList.contains('clicked')) {
+    domUpdates.displayFavorites(findFavorites(currentUser,recipeDatas))
+    favButton.classList.add('clicked')
   }
   else{
     favButton.classList.remove('clicked')
-    domUpdates.displayAllRecipes(recipeDatas,favorites)
+    domUpdates.displayAllRecipes(recipeDatas,currentUser)
   }
 })
-let user, pantry;
+menuMyUpcomingRecipes.addEventListener('click',() =>{
+  domUpdates.displayUpcomingRecipes(currentUser,recipeDatas)
+})
+let pantry;
 
 
 recipeCards.addEventListener('click', () => {
-if(event.target.classList.contains('star-icon')){
+if(event.target.classList.contains('star-icon')) {
   toogleFavorites(event)
 }
+if (event.target.classList.contains('plus-icon')) {
+  addToUpcomingRecipes(currentUser, recipeDatas);
+}
 })
+
 function toogleFavorites(event){
   if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
     event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
     addToFavorites(event)
-    console.log(favorites)
   }else{   
     removeFromFavorites(event)
     event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" }
 }
 function addToFavorites(event){
 let recipe = event.target.closest('.single-recipe-card')
-favorites.push(recipe.id)
-console.log(favorites)
+currentUser.addToFavorites(recipe.id)
 }
 function removeFromFavorites(event) {
+  favorites = currentUser.favoriteRecipes
   let recipe = event.target.closest('.single-recipe-card')
   if(favorites.includes(recipe.id)){
-    favorites.splice(favorites.indexOf(recipe.id),1)
+    currentUser.removeFromFavorites(recipe.id)
   }
 }
 
 // window.onload = onStartup();
 // window.onload = showDomUpdates(recipe);
 window.onload = function() {
-  console.log('hello')
- grabRecipes()
-  //grabUsers()
   mergeFetchTimelines()
 }
-<<<<<<< HEAD
-// homeButton.addEventListener('click', cardButtonConditionals);
-// favButton.addEventListener('click', viewFavorites);
-// cardArea.addEventListener('click', cardButtonConditionals);
-
-function displayAllRecipes(recipe) {
-  if (recipeCards === null) {
-    return 
-  }
-  recipeCards.innerHTML += `<article class="single-recipe-card">
-       <article class="all-card-icons">
-         <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-         <div class="favorite card-icon" alt="empty star icon used to favorite and unfavorite recipes"><div>
-       </article>
-       <article class="card-image-section">
-         <img class="card-image" src="${recipe.image}" alt="sample display of recipe">
-       </article>
-       <article class="recipe-name-area">
-         <h2 class="recipe-name">${recipe.name}</h2>
-       </article>
-     </article>`
-=======
 function createUser(usersData) {
   let currentUser = usersData.find(user => {
     let parsedID = parseInt(user.id);
@@ -114,8 +80,12 @@ function createUser(usersData) {
     return parsedID === domUpdates.randomNumber
   })
   return new User(currentUser.id,currentUser.name,currentUser.pantry)
->>>>>>> main
 }
+
+function addToUpcomingRecipes(currentUser, recipeDatas) {
+  let recipe = event.target.closest('.single-recipe-card')
+  currentUser.addToRecipesToCook(recipe.id);
+};
 
 function createPantry(currentUser, ingredientsData) {
   currentUser.pantry.forEach(pantryItem => {
@@ -131,12 +101,12 @@ function createPantry(currentUser, ingredientsData) {
   //what if we made a class here?
   return new Pantry(currentUser.pantry)
 }
+
 function grabRecipes() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
+  return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
   .then(response => response.json())
   .then(recipeObject => {
     recipeDatas = recipeObject.recipeData
-      domUpdates.displayAllRecipes(recipeDatas,favorites);
   })
   .catch(err => {
     console.log(err);
@@ -149,7 +119,6 @@ function grabUsers() {
     return response.json()
   })
   .then(data => {
-    console.log(domUpdates.randomNumber)
     domUpdates.greetUser(data.wcUsersData[domUpdates.randomNumber -1])
      return data.wcUsersData;
       })
@@ -171,12 +140,12 @@ function grabUsers() {
 })
 }
 function mergeFetchTimelines() {
- Promise.all([grabUsers(), grabIngredients()])
+ Promise.all([grabUsers(), grabIngredients(), grabRecipes()])
  .then(values => {
-   console.log(values[1])
    let usersData = values[0]
    ingredientsData = values[1]
-   let currentUser = createUser(usersData)
+    currentUser = createUser(usersData)
+    domUpdates.displayAllRecipes(recipeDatas,currentUser);
    let pantry = createPantry(currentUser,ingredientsData)
       domUpdates.displayPantry(pantry)
  })
@@ -186,9 +155,9 @@ function mergeFetchTimelines() {
   })
   
 }
-function findFavorites(ids,recipeDatas) {
- 
-  let favoriteRecipies = recipeData.filter(recipe =>{
+function findFavorites(currentUser,recipeDatas) {
+  let ids = currentUser.favoriteRecipes
+  let favoriteRecipies = recipeDatas.filter(recipe =>{
     return ids.includes(String(recipe.id))
   })
   return favoriteRecipies

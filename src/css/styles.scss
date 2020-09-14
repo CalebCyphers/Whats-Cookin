@@ -154,7 +154,7 @@ h1 {
   }
 
   .search-button {
-    @include centerFlex()
+    @include centerFlex();
     height: 1.75rem;
     width: 1.75rem;
     border: 1px solid $darkest-color;
