@@ -1,3 +1,9 @@
+let favButton = document.querySelector('.view-favorites');
+let homeButton = document.querySelector('.home')
+let cardArea = document.querySelector('.all-cards');
+const recipeCards = document.querySelector('.all-cards');
+let pantryArea = document.querySelector('.pantry-cards');
+let recipeSearch = document.querySelector('.search-recipes-input')
 let domUpdates = {
   randomNumber :  Math.floor(Math.random() * 49) + 1,
 
@@ -209,4 +215,4 @@ let domUpdates = {
 //   getFavorites();
 // };
 
-
+export default domUpdates;

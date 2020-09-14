@@ -47,11 +47,11 @@ class Pantry {
     }, 0)
   }
   addNecessaryIngredients(recipe) {
-   let allMissing =  this.findAmountMissing(recipe)
-   return allMissing.map(ing =>{
-    return {["ingredient"]: ing.facts.id,
-    ["amount"]: ing.facts.amountMissing}
-   }) 
+    let allMissing =  this.findAmountMissing(recipe)
+    return allMissing.map(ing =>{
+      return {["ingredient"]: ing.facts.id,
+        ["amount"]: ing.facts.amountMissing}
+    }) 
   }
   findIngredientInPantry(ingredient) {
     return this.contents.find(pantryIngredient => {
@@ -59,4 +59,4 @@ class Pantry {
     })
   }
 }
-// export default Pantry;
+export default Pantry;

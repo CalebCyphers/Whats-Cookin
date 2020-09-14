@@ -1,17 +1,17 @@
-// import './css/base.scss';
-// import './css/styles.scss';
+import './css/base.scss';
+import './css/styles.scss';
 
-// import recipeData from './data/recipes';
-// import ingredientData from './data/ingredients';
-// import users from './data/users';
+import recipeData from './data/recipes';
+import ingredientData from './data/ingredients';
+import users from './data/users';
 
-// import Pantry from './pantry';
-// import Recipe from './recipe';
-// import User from './user';
-// import Cookbook from './cookbook';
-// import domUpdates from './domUpdates';
+import Pantry from './pantry';
+import Recipe from './recipe';
+import User from './user';
+import Cookbook from './cookbook';
+import domUpdates from './domUpdates';
 let favorites = []
-let recipeData;
+let recipeDatas;
 let ingredientsData;
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
@@ -25,12 +25,12 @@ recipeSearch.addEventListener('keyup', ()=>{
 })
 favButton.addEventListener('click', ()=>{
   if(!favButton.classList.contains('clicked')){
-  domUpdates.displayFavorites(findFavorites(favorites,recipeData))
+  domUpdates.displayFavorites(findFavorites(favorites,recipeDatas))
   favButton.classList.add('clicked')
   }
   else{
     favButton.classList.remove('clicked')
-    domUpdates.displayAllRecipes(recipeData,favorites)
+    domUpdates.displayAllRecipes(recipeDatas,favorites)
   }
 })
 let user, pantry;
@@ -65,6 +65,7 @@ function removeFromFavorites(event) {
 // window.onload = onStartup();
 // window.onload = showDomUpdates(recipe);
 window.onload = function() {
+  console.log('hello')
  grabRecipes()
   //grabUsers()
   mergeFetchTimelines()
@@ -96,8 +97,8 @@ function grabRecipes() {
   fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
   .then(response => response.json())
   .then(recipeObject => {
-    recipeData = recipeObject.recipeData
-      domUpdates.displayAllRecipes(recipeData,favorites);
+    recipeDatas = recipeObject.recipeData
+      domUpdates.displayAllRecipes(recipeDatas,favorites);
   })
   .catch(err => {
     console.log(err);
@@ -147,16 +148,16 @@ function mergeFetchTimelines() {
   })
   
 }
-function findFavorites(ids,recipeData) {
+function findFavorites(ids,recipeDatas) {
  
-  favoriteRecipies = recipeData.filter(recipe =>{
+  let favoriteRecipies = recipeData.filter(recipe =>{
     return ids.includes(String(recipe.id))
   })
-  console.log(favoriteRecipies)
   return favoriteRecipies
 }
 function filterInputs(letters,ingredientsData){
-  return recipeData.filter(recipe=>{
+  console.log(letters)
+  return recipeDatas.filter(recipe=>{
     let correctIngredient  = ingredientsData.find(ingredient =>{ 
       return recipe.ingredients.find(recIngredients => {
         return recIngredients.id === ingredient.id
