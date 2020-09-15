@@ -49,13 +49,12 @@ let domUpdates = {
   },
   
    displayPantry(pantry) {
-    if(pantryArea === null) {
-      return 
-    }
+    
     pantry = pantry.contents
-    pantryArea.innerHTML = ''
+    recipeCards.innerHTML = ''
     pantry.forEach(ingInPantry => {
-      pantryArea.innerHTML += `<article class="single-ingredient-card">
+      console.log(ingInPantry)
+      recipeCards.innerHTML += `<article class="single-ingredient-card">
     <article class="ingredient-name-area">
       <h2 class="ingredient-name">${ingInPantry.name}</h2>
     </article>

@@ -11,7 +11,8 @@ let recipeDatas;
 let ingredientsData;
 let currentUser;
 let favorites;
-
+let pantry;
+let pantyButton = document.querySelector('.menu-my-pantry-title');
 let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
@@ -53,8 +54,10 @@ menuMyUpcomingRecipes.addEventListener('click',() =>{
     domUpdates.displayAllRecipes(recipeDatas,currentUser)
       }
 })
-let pantry;
 
+pantyButton.addEventListener('click', () => {
+  domUpdates.displayPantry(pantry)
+})
 
 recipeCards.addEventListener('click', () => {
 if(event.target.classList.contains('star-icon')) {
@@ -105,16 +108,19 @@ function addToUpcomingRecipes(currentUser, recipeDatas) {
 };
 
 function createPantry(currentUser, ingredientsData) {
+  console.log(currentUser.pantry)
   currentUser.pantry.forEach(pantryItem => {
     let currentIngredient = ingredientsData.find(ingredient => {
       return pantryItem.ingredient === ingredient.id;
     })
-    if(!pantryItem.name){
+    if(!currentIngredient.name ){
       return
     }
+    pantryItem.amount = Math.ceil(pantryItem.amount)
      pantryItem.name = currentIngredient.name;
     pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
   })
+  console.log(currentUser.pantry)
   //what if we made a class here?
   return new Pantry(currentUser.pantry)
 }
@@ -163,8 +169,8 @@ function mergeFetchTimelines() {
    ingredientsData = values[1]
     currentUser = createUser(usersData)
     domUpdates.displayAllRecipes(recipeDatas,currentUser);
-   let pantry = createPantry(currentUser,ingredientsData)
-      domUpdates.displayPantry(pantry)
+    pantry = createPantry(currentUser,ingredientsData)
+
  })
   .catch(err => {
       console.log(err);
