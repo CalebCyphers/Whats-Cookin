@@ -40,7 +40,7 @@ let domUpdates = {
 
   },
 
-  displayRecipeInfo(recipe) {
+  displayRecipeInfo(recipe, ingredients) {
     let trueInstructions = recipe.instructions.map(instruction => {
       return instruction.instruction;
     }).join(',')
