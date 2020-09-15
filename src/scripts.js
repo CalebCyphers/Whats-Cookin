@@ -19,7 +19,7 @@ let cardArea = document.querySelector('.all-cards');
 const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 let recipeSearch = document.querySelector('.search-recipes-input')
-// let cookbook = new Cookbook(recipeData);
+let recipeDisplay = document.querySelector('.recipe-display');
 recipeSearch.addEventListener('keyup', ()=>{
   if(favButton.classList.contains('clicked')){
     domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'favoriteRecipes'),currentUser)
@@ -55,6 +55,7 @@ menuMyUpcomingRecipes.addEventListener('click',() =>{
 })
 let pantry;
 
+recipeDisplay.addEventListener('click', domUpdates.hideRecipePopup);
 
 recipeCards.addEventListener('click', () => {
 if(event.target.classList.contains('star-icon')) {
@@ -62,6 +63,9 @@ if(event.target.classList.contains('star-icon')) {
 }
 if (event.target.classList.contains('plus-icon')) {
   addToUpcomingRecipes(currentUser, recipeDatas);
+}
+if(event.target.classList.contains('card-image')) {
+  domUpdates.showRecipePopup();
 }
 })
 
