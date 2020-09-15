@@ -53,7 +53,6 @@ menuMyUpcomingRecipes.addEventListener('click',() =>{
     domUpdates.displayAllRecipes(recipeDatas,currentUser)
       }
 })
-let pantry;
 
 recipeDisplay.addEventListener('click', domUpdates.hideRecipePopup);
 
@@ -64,10 +63,22 @@ if(event.target.classList.contains('star-icon')) {
 if (event.target.classList.contains('plus-icon')) {
   addToUpcomingRecipes(currentUser, recipeDatas);
 }
-if(event.target.classList.contains('card-image')) {
+if (event.target.classList.contains('card-image')) {
   domUpdates.showRecipePopup();
+  let chosenRecipe = event.target.closest('.single-recipe-card')
+  domUpdates.displayRecipeInfo(createRecipe(chosenRecipe.id))
 }
 })
+
+function getRecipeIngredientNames() {
+  //access the ingredients from ingredientData
+  //compare each ingredient and see if the ingredient
+  //is included in the recipe.ingredients (by ID)
+  //if true => returns the ingredient that matches
+  //set those included ingredients to a variable
+  //for each of those found ingredients, reassign
+  //values by creating new keys
+}
 
 function toggleFavorites(event){
   if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
@@ -97,13 +108,21 @@ window.onload = function() {
 function createUser(usersData) {
   let currentUser = usersData.find(user => {
     let parsedID = parseInt(user.id);
-    console.log(domUpdates.randomNumber)
     return parsedID === domUpdates.randomNumber
   })
   return new User(currentUser.id,currentUser.name,currentUser.pantry)
 }
 
-function addToUpcomingRecipes(currentUser, recipeDatas) {
+function createRecipe(id) {
+  let currentRecipe = recipeDatas.find(recipe => {
+    return recipe.id == id;
+  })
+  console.log(currentRecipe)
+  return new Recipe(currentRecipe, ingredientsData)
+
+};
+
+function addToUpcomingRecipes(currentUser) {
   let recipe = event.target.closest('.single-recipe-card')
   currentUser.addToRecipesToCook(recipe.id);
 };
@@ -163,18 +182,17 @@ function grabUsers() {
 function mergeFetchTimelines() {
  Promise.all([grabUsers(), grabIngredients(), grabRecipes()])
  .then(values => {
-   let usersData = values[0]
-   ingredientsData = values[1]
+   let usersData = values[0];
+   ingredientsData = values[1];
     currentUser = createUser(usersData)
     domUpdates.displayAllRecipes(recipeDatas,currentUser);
    let pantry = createPantry(currentUser,ingredientsData)
-      domUpdates.displayPantry(pantry)
- })
+    domUpdates.displayPantry(pantry)
+    })
   .catch(err => {
       console.log(err);
       alert('Sorry, the information failed to load. Try again later.');
-  })
-  
+  }) 
 }
 function findFavorites(currentUser,recipeDatas,currentUserProperty) {
   let ids = currentUser[currentUserProperty]
