@@ -21,11 +21,21 @@ let pantryArea = document.querySelector('.pantry-cards');
 let recipeSearch = document.querySelector('.search-recipes-input')
 // let cookbook = new Cookbook(recipeData);
 recipeSearch.addEventListener('keyup', ()=>{
+  if(favButton.classList.contains('clicked')){
+    domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'favoriteRecipes'),currentUser)
+
+  }
+  else if(menuMyUpcomingRecipes.classList.contains('clicked')){
+    domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'recipesToCook'),currentUser)
+
+  }
+  else{
   domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),currentUser)
+  }
 })
 favButton.addEventListener('click', ()=>{
   if(!favButton.classList.contains('clicked')) {
-    domUpdates.displayFavorites(findFavorites(currentUser,recipeDatas))
+    domUpdates.displayFavorites(findFavorites(currentUser,recipeDatas,'favoriteRecipes'))
     favButton.classList.add('clicked')
   }
   else{
@@ -34,21 +44,28 @@ favButton.addEventListener('click', ()=>{
   }
 })
 menuMyUpcomingRecipes.addEventListener('click',() =>{
-  domUpdates.displayUpcomingRecipes(currentUser,recipeDatas)
+      if(!menuMyUpcomingRecipes.classList.contains('clicked')) {
+        domUpdates.displayUpcomingRecipes(currentUser,recipeDatas)
+        menuMyUpcomingRecipes.classList.add('clicked')
+      }
+      else{
+        menuMyUpcomingRecipes.classList.remove('clicked')
+    domUpdates.displayAllRecipes(recipeDatas,currentUser)
+      }
 })
 let pantry;
 
 
 recipeCards.addEventListener('click', () => {
 if(event.target.classList.contains('star-icon')) {
-  toogleFavorites(event)
+  toggleFavorites(event)
 }
 if (event.target.classList.contains('plus-icon')) {
   addToUpcomingRecipes(currentUser, recipeDatas);
 }
 })
 
-function toogleFavorites(event){
+function toggleFavorites(event){
   if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
     event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
     addToFavorites(event)
@@ -155,23 +172,34 @@ function mergeFetchTimelines() {
   })
   
 }
-function findFavorites(currentUser,recipeDatas) {
-  let ids = currentUser.favoriteRecipes
+function findFavorites(currentUser,recipeDatas,currentUserProperty) {
+  let ids = currentUser[currentUserProperty]
   let favoriteRecipies = recipeDatas.filter(recipe =>{
     return ids.includes(String(recipe.id))
   })
   return favoriteRecipies
 }
-function filterInputs(letters,ingredientsData){
+function filterInputs(letters,ingredientsData,currentUserProperty){
+  if(letters === ''){
+    return 
+  }
+  letters = letters.trim()
+  let arrayToFilter;
+  if(currentUserProperty === undefined){
+     arrayToFilter = recipeDatas
+  }
+  else{
+   arrayToFilter = findFavorites(currentUser,recipeDatas,currentUserProperty);
+  }
   console.log(letters)
-  return recipeDatas.filter(recipe=>{
+  return arrayToFilter.filter(recipe => {
+
     let correctIngredient  = ingredientsData.find(ingredient =>{ 
       return recipe.ingredients.find(recIngredients => {
         return recIngredients.id === ingredient.id
       })
-     } )
-     
-    return correctIngredient.name.toUpperCase().includes(letters.toUpperCase())
+     })
+    return correctIngredient.name.toUpperCase().includes(letters.toUpperCase()) || recipe.name.toUpperCase().includes(letters.toUpperCase()) || recipe.tags.join('').includes(letters)
   })
 }
 
