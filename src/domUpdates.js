@@ -5,6 +5,7 @@ const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 let recipeSearch = document.querySelector('.search-recipes-input');
 let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
+let recipeDisplay = document.querySelector('.recipe-display');
 
 let domUpdates = {
   randomNumber :  Math.floor(Math.random() * 49) + 1,
@@ -38,6 +39,14 @@ let domUpdates = {
        </article>`
       })
 
+  },
+
+  showRecipePopup() {
+    recipeDisplay.classList.remove('hidden');
+  },
+
+  hideRecipePopup() {
+    recipeDisplay.classList.add('hidden');
   },
   
    greetUser(user) {
