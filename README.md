@@ -34,8 +34,7 @@ Desktop to Tablet to Mobile Responsiveness
 
 Functionality
 
-![gif showing user interaction across displays]()
-
+![gif showing user interaction across displays](http://g.recordit.co/ObVuaoi3vf.gif)
 
 ### Wins
 
