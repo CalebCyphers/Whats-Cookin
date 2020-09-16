@@ -58,7 +58,7 @@ let domUpdates = {
 
     let trueInstructions = recipe.instructions.map(instruction => {
       return instruction.instruction;
-    }).join(',')
+    }).join('<br>')
     recipeDisplay.innerHTML = ''
     recipeDisplay.innerHTML += 
     `<section class="recipe-display-main">
