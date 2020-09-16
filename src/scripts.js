@@ -50,7 +50,7 @@ favButton.addEventListener('click', ()=>{
     favButton.classList.remove('clicked')
     domUpdates.displayAllRecipes(recipesData,currentUser)
   }
-})
+});
 
 menuMyUpcomingRecipes.addEventListener('click',() =>{
       if(!menuMyUpcomingRecipes.classList.contains('clicked')) {
@@ -61,28 +61,28 @@ menuMyUpcomingRecipes.addEventListener('click',() =>{
         menuMyUpcomingRecipes.classList.remove('clicked')
     domUpdates.displayAllRecipes(recipesData,currentUser)
       }
-})
+});
 
 myPantryButton.addEventListener('click', () => {
   domUpdates.displayPantry(pantry)
-})
+});
+
 recipeDisplay.addEventListener('click', domUpdates.hideRecipePopup);
 
 recipeCards.addEventListener('click', () => {
-if(event.target.classList.contains('star-icon')) {
-  toggleFavorites(event)
-}
-if (event.target.classList.contains('plus-icon')) {
-  addToUpcomingRecipes(currentUser, recipesData);
-}
-if (event.target.classList.contains('card-image')) {
-  domUpdates.showRecipePopup();
-  let chosenRecipe = event.target.closest('.single-recipe-card')
-  findNames(createRecipe(chosenRecipe.id),ingredientsData)
-  domUpdates.displayRecipeInfo(createRecipe(chosenRecipe.id),cookAbleRecipes,missingIng)
-}
-})
-
+  if(event.target.classList.contains('star-icon')) {
+    toggleFavorites(event)
+  }
+  if (event.target.classList.contains('plus-icon')) {
+    addToUpcomingRecipes(currentUser, recipesData);
+  }
+  if (event.target.classList.contains('card-image')) {
+    domUpdates.showRecipePopup();
+    let chosenRecipe = event.target.closest('.single-recipe-card')
+    findNames(createRecipe(chosenRecipe.id),ingredientsData)
+    domUpdates.displayRecipeInfo(createRecipe(chosenRecipe.id),cookAbleRecipes,missingIng)
+  }
+});
 
 hamburgerIcon.addEventListener('click', ()=>{
   navMenu.classList.remove('hidden');
@@ -91,7 +91,7 @@ hamburgerIcon.addEventListener('click', ()=>{
   myPantryButton.classList.remove('hidden');
   myFavoritesButton.classList.remove('hidden');
   myRecipesButton.classList.remove('hidden');
-})
+});
 
 closeIcon.addEventListener('click', ()=>{
   navMenu.classList.add('hidden');
@@ -100,21 +100,21 @@ closeIcon.addEventListener('click', ()=>{
   myPantryButton.classList.add('hidden');
   myFavoritesButton.classList.add('hidden');
   myRecipesButton.classList.add('hidden');
-})
+});
 
-function toggleFavorites(event){
+function toggleFavorites(event) {
   if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
     event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
     addToFavorites(event)
   }else{   
     removeFromFavorites(event)
     event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" }
-}
+};
 
-function addToFavorites(event){
+function addToFavorites(event) {
 let recipe = event.target.closest('.single-recipe-card')
 currentUser.addToFavorites(recipe.id)
-}
+};
 
 function removeFromFavorites(event) {
   favorites = currentUser.favoriteRecipes
@@ -122,7 +122,7 @@ function removeFromFavorites(event) {
   if(favorites.includes(recipe.id)){
     currentUser.removeFromFavorites(recipe.id)
   }
-}
+};
 
 function createUser(usersData) {
   let currentUser = usersData.find(user => {
@@ -130,14 +130,13 @@ function createUser(usersData) {
     return parsedID === domUpdates.randomNumber
   })
   return new User(currentUser.id,currentUser.name,currentUser.pantry)
-}
+};
 
 function createRecipe(id) {
   let currentRecipe = recipesData.find(recipe => {
     return recipe.id == id;
   })
   return new Recipe(currentRecipe, ingredientsData)
-
 };
 
 function addToUpcomingRecipes(currentUser) {
@@ -153,12 +152,10 @@ function createPantry(currentUser, ingredientsData) {
     if(!currentIngredient.name ){
       return
     }
-    refigurePantry(pantryItem,currentIngredient)
-    
+    refigurePantry(pantryItem,currentIngredient) 
   })
-  //what if we made a class here?
   return new Pantry(currentUser.pantry)
-}
+};
 
 function grabRecipes() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
@@ -169,7 +166,7 @@ function grabRecipes() {
   .catch(err => {
     console.log(err);
     alert('Sorry, the recipes failed to load. Try again later.')})
-}
+};
 
 function grabUsers() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData',)
@@ -184,7 +181,8 @@ function grabUsers() {
       console.log(err);
       alert('Sorry, the user information failed to load. Try again later.');
   })
-}
+};
+
   function grabIngredients() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/ingredients/ingredientsData')
   .then(response => {
@@ -195,8 +193,9 @@ function grabUsers() {
   .catch(err => {
       console.log(err);
       alert('Sorry, the ingredients failed to load. Try again later.');    
-})
-}
+  })
+};
+
 function mergeFetchTimelines() {
  Promise.all([grabUsers(), grabIngredients(), grabRecipes()])
  .then(values => {
@@ -212,7 +211,7 @@ function mergeFetchTimelines() {
       console.log(err);
       alert('Sorry, the information failed to load. Try again later.');
   }) 
-}
+};
 
 function findFavorites(currentUser,recipesData,currentUserProperty) {
   let ids = currentUser[currentUserProperty]
@@ -220,25 +219,25 @@ function findFavorites(currentUser,recipesData,currentUserProperty) {
     return ids.includes(String(recipe.id))
   })
   return favoriteRecipies
-}
+};
 
 function findRecipiesCanCook(missingIng){
-
   return missingIng.filter(recipe =>{
      return recipe.NotEnough.length === 0
   })
-}
+};
+
 function refigurePantry(pantryItem,currentIngredient){
   pantryItem.amount = Math.ceil(pantryItem.amount)
   pantryItem.name = currentIngredient.name;
   pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
-}
+};
 
 function findWhichIngredientsAreMissing(recipesData) {
   return recipesData.map(recipe =>{
-  return {name :recipe.name, id:recipe.id,ingredients:recipe.ingredients, NotEnough:pantry.findWhichIngredientsAreShort(recipe)}
+    return {name :recipe.name, id:recipe.id,ingredients:recipe.ingredients, NotEnough:pantry.findWhichIngredientsAreShort(recipe)}
  })
-}
+};
 
 function filterInputs(letters,ingredientsData,currentUserProperty){
   if(letters === ''){
@@ -253,29 +252,27 @@ function filterInputs(letters,ingredientsData,currentUserProperty){
    arrayToFilter = findFavorites(currentUser,recipesData,currentUserProperty);
   }
   return findLettersInRecipes(arrayToFilter,letters,ingredientsData)
-}
+};
+
 function findLettersInRecipes (arrayToFilter,letters,ingredientsData){
   return arrayToFilter.filter(recipe => {
-  
     let correctIngredient  = ingredientsData.find(ingredient =>{ 
       return recipe.ingredients.find(recIngredients => {
         return recIngredients.id === ingredient.id
       })
      })
     return correctIngredient.name.toUpperCase().includes(letters.toUpperCase()) || recipe.name.toUpperCase().includes(letters.toUpperCase()) || recipe.tags.join('').includes(letters)
-})
-}
+  })
+};
+
 function findNames(recipe,ingredientsData) {
   recipe.ingredients.forEach(ingredient =>{
     let correctIngredient= ingredientsData.find(ing =>{
         return ingredient.id === ing.id
       })    
-     
       ingredient.name = correctIngredient.name
-
     })
-    console.log(recipe)
-  }
+  };
   
 
 
