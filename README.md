@@ -1,6 +1,7 @@
 ## What's Cookin'
 
 A front-end project by Taylor Johnson, Nicole Gooden, and Caleb Cyphers.
+**link to deployed site**
 
 ### Project Overview
 
@@ -26,7 +27,17 @@ This project is meant to present the user with a display of recipes, from which 
 
 1. Click the link, `http://localhost: 8080/` to open what's running from the server in the browser.  If changes are saved from the code editor (Atom, VS Code, etc.), the live server will auto-update to reflect those changes.
 
+### Wins
 
++ Fetch requests (GET) are resolved without any crashes
++ SASS makes use of variables, mixins, etc.
++ Workflow: all teammates approved changes before a PR was merged
+
+### Challenges
+
++ Access
+
+### Preview
 
 
 
