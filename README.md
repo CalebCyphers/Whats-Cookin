@@ -1,105 +1,66 @@
-# Webpack Starter Kit
+## What's Cookin'
 
-## Clone This Repo
+A front-end project by Taylor Johnson, Nicole Gooden, and Caleb Cyphers.
+**link to deployed site**
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+### Project Overview
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+This project is meant to present the user with a display of recipes, from which the user can choose to favorite recipes, add to the upcoming recipes section, or view the recipe information popup that details the total cost of ingredients, required ingredients, and instructions.  A search feature has been implemented so that the user can find desired recipes more quickly, based on ingredient, tag, or name.  The user also has access to its pantry, where pantry item cards are shown with the amount in stock. 
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+### Technologies 
 
-## Setup
++ HTML, CSS, JavaScript
++ Fetch (GET) to API
++ Chai Spies for DOM methods
++ SASS for CSS styling
++ Webpack
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
+### Installation
 
-Then install the library dependencies. Run:
+1. Clone this repo to the local computer using `git clone` on the CLI. followed by the copied SSH link from the green `Code` button.
 
-```bash
-npm install
-```
+1. Run `npm install` to install all NPM dependencies.
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text and a pink background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+1. From the terminal, run `npm run-script build` to allow the building of Webpack-related files.
 
-## Where to Add Your Code
+1. From the terminal, run `npm start` to get the server going. There will be confirmation in the form of a `Compiled successfully` message when this is complete.
 
-### JavaScript
+1. Click the link, `http://localhost: 8080/` to open what's running from the server in the browser.  If changes are saved from the code editor (Atom, VS Code, etc.), the live server will auto-update to reflect those changes.
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+### Preview
 
-**Create all of your feature code files in the `src` directory.**
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+### Wins
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
++ Fetch requests (GET) are resolved without any crashes
++ SASS makes use of variables, mixins, etc.
++ Workflow: all teammates approved changes before a PR was merged
 
-### HTML
+### Challenges
 
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
++ Planning and working with a codebase that had been set up with significant amounts of code, some of which needed a lot of refactoring.  Our team spent a majority of our time deciphering what the codebase was already managing well in terms of UI and JS, where code existed, and how to make the best use of our time moving forward in the process.  We felt stuck for the first few days while we were putting the pieces together, and attribute that to the delay of product progression overall.  Next time, we would plan more thoroughly and do some more inspecting of the codebase we're given.
 
-### CSS (SCSS/SASS)
++ Accessing data from the resolved promises of Fetch requests.  This challenge mostly pertains to figuring out when DOM methods and `scripts` functions would have access to the data from each fetch request.
 
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
++ Spies - how they work and how they are tested with a 'mock' object that represents `domUpdates {}` 
 
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
++ Project Board - our tickets were not modular enough in a way that we could close issues consistently on PRs.  We should have broken them down into smaller tasks and kept up with the project board in a way that would benefit our workflow.
 
-### Images
+### Next Steps
 
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
++ Fix the recipe popup so that the font, colors, and layout are more user-friendly
++ Refactor our functions for better readability
++ Create a hover state so a cursor appears when a user hovers over a clickable element
++ Make UI more sensible and straightforward, i.e. 
+    + Make it known that the recipe image, when clicked, will display that recipe's popup
+    + Add a confirmation that a recipe has been added to the upcoming recipes when a recipe card's `+` icon is clicked.
+    + Add a 'Back to Home' button rather than double clicking `Favorites` to return to the display of all fetched recipes
 
-## How to View Your Code in Action
 
-In the terminal, run:
 
-```bash
-npm start
-```
 
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
 
-```bash
-Project is running at http://localhost:8080/
-```
 
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
 
----
 
-## Test Files Organization
 
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
