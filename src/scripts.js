@@ -9,9 +9,11 @@ import Cookbook from './cookbook';
 import domUpdates from './domUpdates';
 let recipeDatas;
 let ingredientsData;
-let currentUser;
+let currentUser
 let favorites;
 let pantry;
+let cookAbleRecipies;
+let missingIng;
 let pantyButton = document.querySelector('.menu-my-pantry-title');
 let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
 let favButton = document.querySelector('.view-favorites');
@@ -96,19 +98,17 @@ window.onload = function() {
 function createUser(usersData) {
   let currentUser = usersData.find(user => {
     let parsedID = parseInt(user.id);
-    console.log(domUpdates.randomNumber)
     return parsedID === domUpdates.randomNumber
   })
   return new User(currentUser.id,currentUser.name,currentUser.pantry)
 }
 
-function addToUpcomingRecipes(currentUser, recipeDatas) {
+function addToUpcomingRecipes(currentUser) {
   let recipe = event.target.closest('.single-recipe-card')
   currentUser.addToRecipesToCook(recipe.id);
 };
 
 function createPantry(currentUser, ingredientsData) {
-  console.log(currentUser.pantry)
   currentUser.pantry.forEach(pantryItem => {
     let currentIngredient = ingredientsData.find(ingredient => {
       return pantryItem.ingredient === ingredient.id;
@@ -120,7 +120,7 @@ function createPantry(currentUser, ingredientsData) {
      pantryItem.name = currentIngredient.name;
     pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
   })
-  console.log(currentUser.pantry)
+  console.log('our pantry',currentUser.pantry)
   //what if we made a class here?
   return new Pantry(currentUser.pantry)
 }
@@ -170,7 +170,10 @@ function mergeFetchTimelines() {
     currentUser = createUser(usersData)
     domUpdates.displayAllRecipes(recipeDatas,currentUser);
     pantry = createPantry(currentUser,ingredientsData)
-
+    missingIng = findWhichIngredientsAreMissing(recipeDatas)
+    console.log('add',missingIng)
+    cookAbleRecipies = findRecipiesCanCook(missingIng)
+    console.log('what can we cook?',cookAbleRecipies)
  })
   .catch(err => {
       console.log(err);
@@ -185,6 +188,17 @@ function findFavorites(currentUser,recipeDatas,currentUserProperty) {
   })
   return favoriteRecipies
 }
+function findRecipiesCanCook(missingIng){
+
+  return missingIng.filter(recipe =>{
+     return recipe.NotEnough.length === 0
+  })
+}
+function findWhichIngredientsAreMissing(recipeDatas) {
+  return recipeDatas.map(recipe =>{
+  return {name :recipe.name, ingredients:recipe.ingredients, NotEnough:pantry.findWhichIngredientsAreShort(recipe)}
+ })
+}
 function filterInputs(letters,ingredientsData,currentUserProperty){
   if(letters === ''){
     return 
@@ -197,7 +211,6 @@ function filterInputs(letters,ingredientsData,currentUserProperty){
   else{
    arrayToFilter = findFavorites(currentUser,recipeDatas,currentUserProperty);
   }
-  console.log(letters)
   return arrayToFilter.filter(recipe => {
 
     let correctIngredient  = ingredientsData.find(ingredient =>{ 

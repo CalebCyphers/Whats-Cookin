@@ -53,6 +53,7 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
+dist/main.bundle.js
 # Yarn Integrity file
 .yarn-integrity
 

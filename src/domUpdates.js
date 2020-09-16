@@ -7,10 +7,10 @@ let recipeSearch = document.querySelector('.search-recipes-input');
 let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
 
 let domUpdates = {
-  randomNumber :  Math.floor(Math.random() * 49) + 1,
+  randomNumber: Math.floor(Math.random() * 49) + 1,
 
   
-   displayAllRecipes(recipes,currentUser) {
+  displayAllRecipes(recipes,currentUser) {
     
     let favorites = currentUser.favoriteRecipes
 
@@ -21,9 +21,9 @@ let domUpdates = {
     recipes.forEach(recipe => {
       let src = "https://image.flaticon.com/icons/svg/149/149222.svg"
       if (favorites !== undefined && favorites.includes(String(recipe.id) )) {
-         src = "https://image.flaticon.com/icons/svg/148/148841.svg"
+        src = "https://image.flaticon.com/icons/svg/148/148841.svg"
       }
-    recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
+      recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
          <article class="all-card-icons">
            <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
            <img class="star-icon card-icon" src=${src}
@@ -36,24 +36,22 @@ let domUpdates = {
            <h2 class="recipe-name">${recipe.name}</h2>
          </article>
        </article>`
-      })
+    })
 
   },
   
-   greetUser(user) {
+  greetUser(user) {
     const userName = document.querySelector('.user-name');
-    if(userName === null){
+    if (userName === null) {
       return 
     }
     userName.innerText += ' ' + user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
   },
   
-   displayPantry(pantry) {
-    
+  displayPantry(pantry) {
     pantry = pantry.contents
     recipeCards.innerHTML = ''
     pantry.forEach(ingInPantry => {
-      console.log(ingInPantry)
       recipeCards.innerHTML += `<article class="single-ingredient-card">
     <article class="ingredient-name-area">
       <h2 class="ingredient-name">${ingInPantry.name}</h2>
@@ -102,14 +100,14 @@ let domUpdates = {
     }
   },
 
-     displayFavorites(favorites) {
-       if (favorites.length === 0 ) {
-         return
-       }
+  displayFavorites(favorites) {
+    if (favorites.length === 0 ) {
+      return
+    }
     
-      recipeCards.innerHTML = ''
-      favorites.forEach(recipe =>{
-        recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
+    recipeCards.innerHTML = ''
+    favorites.forEach(recipe =>{
+      recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
       <article class="all-card-icons">
         <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
         <img class="star-icon card-icon" src="https://image.flaticon.com/icons/svg/148/148841.svg"
@@ -122,9 +120,9 @@ let domUpdates = {
         <h2 class="recipe-name">${recipe.name}</h2>
       </article>
     </article>`
-      })
-    }
+    })
   }
+}
   // function viewFavorites() {
 //   if (cardArea.classList.contains('all')) {
 //     cardArea.classList.remove('all')
