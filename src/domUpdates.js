@@ -23,17 +23,16 @@ let domUpdates = {
       if (favorites !== undefined && favorites.includes(String(recipe.id) )) {
          src = "https://image.flaticon.com/icons/svg/148/148841.svg"
       }
-    recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
+    recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card">
          <article class="all-card-icons">
-           <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-           <img class="star-icon card-icon" src=${src}
-          "alt="empty star icon used to favorite and unfavorite recipes">
+           <img class="plus-icon card-icon" tabindex="0" src="./images/plus-icon.png" alt="show recipe details button">
+           <img class="star-icon card-icon" tabindex="0" src=${src} alt="add to favorites button">
          </article>
          <article class="card-image-section">
-           <img class="card-image" src="${recipe.image}" alt="sample display of recipe">
+           <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}">
          </article>
          <article class="recipe-name-area">
-           <h2 class="recipe-name">${recipe.name}</h2>
+           <h2 class="recipe-name" tabindex="0">${recipe.name}</h2>
          </article>
        </article>`
       })
@@ -81,12 +80,12 @@ let domUpdates = {
     pantry.forEach(ingInPantry => {
       pantryArea.innerHTML += `<article class="single-ingredient-card">
     <article class="ingredient-name-area">
-      <h2 class="ingredient-name">${ingInPantry.name}</h2>
+      <h2 class="ingredient-name" tabindex="0">${ingInPantry.name}</h2>
     </article>
     <article class="ingredient-quantity-section">
-      <button>-</button>
-      <p class = 'ingredient-quantity'>${ingInPantry.amount}</p>
-      <button>+</button>
+      <button alt="decrement ingredient quantity button">-</button>
+      <p class = 'ingredient-quantity' tabindex="0">${ingInPantry.amount}</p>
+      <button alt="incriment ingredient quantity button">+</button>
     </article>
   </article>`
     });
@@ -111,15 +110,14 @@ let domUpdates = {
 
           recipeCards.innerHTML += `<article id = ${recipeDataPoint.id} class="single-recipe-card ">
           <article class="all-card-icons">
-            <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-            <img class="star-icon card-icon" src=${src}
-           "alt="empty star icon used to favorite and unfavorite recipes">
+            <img class="plus-icon card-icon" tabindex="0" src="./images/plus-icon.png" alt="show recipe details">
+            <img class="star-icon card-icon" tabindex="0" src=${src} alt="add to favorites button">
           </article>
           <article class="card-image-section">
-            <img class="card-image" src="${recipeDataPoint.image}" alt="sample display of recipe">
+            <img class="card-image" tabindex="0" src="${recipeDataPoint.image}" alt="sample display of recipe">
           </article>
           <article class="recipe-name-area">
-            <h2 class="recipe-name">${recipeDataPoint.name}</h2>
+            <h2 class="recipe-name" tabindex="0">${recipeDataPoint.name}</h2>
           </article>
         </article>`
         }
@@ -136,15 +134,14 @@ let domUpdates = {
       favorites.forEach(recipe =>{
         recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
       <article class="all-card-icons">
-        <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-        <img class="star-icon card-icon" src="https://image.flaticon.com/icons/svg/148/148841.svg"
-       "alt="empty star icon used to favorite and unfavorite recipes">
+        <img class="plus-icon card-icon" tabindex="0" src="./images/plus-icon.png" alt="show recipe details button">
+        <img class="star-icon card-icon" tabindex="0" src="https://image.flaticon.com/icons/svg/148/148841.svg" alt="add to favorites button">
       </article>
       <article class="card-image-section">
-        <img class="card-image" src="${recipe.image}" alt="sample display of recipe">
+        <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}">
       </article>
       <article class="recipe-name-area">
-        <h2 class="recipe-name">${recipe.name}</h2>
+        <h2 class="recipe-name" tabindex="0">${recipe.name}</h2>
       </article>
     </article>`
       })
