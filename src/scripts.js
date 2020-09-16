@@ -9,9 +9,11 @@ import Cookbook from './cookbook';
 import domUpdates from './domUpdates';
 let recipeDatas;
 let ingredientsData;
-let currentUser;
+let currentUser
 let favorites;
-
+let pantry;
+let cookAbleRecipies;
+let missingIng;
 let myPantryButton = document.querySelector('.menu-my-pantry')
 let myRecipesButton = document.querySelector('.menu-my-upcoming-recipes')
 let myFavoritesButton = document.querySelector('.menu-favorites')
@@ -63,6 +65,9 @@ menuMyUpcomingRecipes.addEventListener('click',() =>{
       }
 })
 
+myPantryButton.addEventListener('click', () => {
+  domUpdates.displayPantry(pantry)
+})
 recipeDisplay.addEventListener('click', domUpdates.hideRecipePopup);
 
 recipeCards.addEventListener('click', () => {
@@ -75,7 +80,8 @@ if (event.target.classList.contains('plus-icon')) {
 if (event.target.classList.contains('card-image')) {
   domUpdates.showRecipePopup();
   let chosenRecipe = event.target.closest('.single-recipe-card')
-  domUpdates.displayRecipeInfo(createRecipe(chosenRecipe.id))
+  findNames(createRecipe(chosenRecipe.id),ingredientsData)
+  domUpdates.displayRecipeInfo(createRecipe(chosenRecipe.id),cookAbleRecipies,missingIng)
 }
 })
 
@@ -141,12 +147,14 @@ function createPantry(currentUser, ingredientsData) {
     let currentIngredient = ingredientsData.find(ingredient => {
       return pantryItem.ingredient === ingredient.id;
     })
-    if(!pantryItem.name){
+    if(!currentIngredient.name ){
       return
     }
+    pantryItem.amount = Math.ceil(pantryItem.amount)
      pantryItem.name = currentIngredient.name;
     pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
   })
+  console.log('our pantry',currentUser.pantry)
   //what if we made a class here?
   return new Pantry(currentUser.pantry)
 }
@@ -195,9 +203,12 @@ function mergeFetchTimelines() {
    ingredientsData = values[1];
     currentUser = createUser(usersData)
     domUpdates.displayAllRecipes(recipeDatas,currentUser);
-   let pantry = createPantry(currentUser,ingredientsData)
-    domUpdates.displayPantry(pantry)
-    })
+    pantry = createPantry(currentUser,ingredientsData)
+    missingIng = findWhichIngredientsAreMissing(recipeDatas)
+    console.log('add',missingIng)
+    cookAbleRecipies = findRecipiesCanCook(missingIng)
+    console.log('what can we cook?',cookAbleRecipies)
+ })
   .catch(err => {
       console.log(err);
       alert('Sorry, the information failed to load. Try again later.');
@@ -209,6 +220,17 @@ function findFavorites(currentUser,recipeDatas,currentUserProperty) {
     return ids.includes(String(recipe.id))
   })
   return favoriteRecipies
+}
+function findRecipiesCanCook(missingIng){
+
+  return missingIng.filter(recipe =>{
+     return recipe.NotEnough.length === 0
+  })
+}
+function findWhichIngredientsAreMissing(recipeDatas) {
+  return recipeDatas.map(recipe =>{
+  return {name :recipe.name, id:recipe.id,ingredients:recipe.ingredients, NotEnough:pantry.findWhichIngredientsAreShort(recipe)}
+ })
 }
 function filterInputs(letters,ingredientsData,currentUserProperty){
   if(letters === ''){
@@ -222,7 +244,6 @@ function filterInputs(letters,ingredientsData,currentUserProperty){
   else{
    arrayToFilter = findFavorites(currentUser,recipeDatas,currentUserProperty);
   }
-  console.log(letters)
   return arrayToFilter.filter(recipe => {
 
     let correctIngredient  = ingredientsData.find(ingredient =>{ 
@@ -233,6 +254,19 @@ function filterInputs(letters,ingredientsData,currentUserProperty){
     return correctIngredient.name.toUpperCase().includes(letters.toUpperCase()) || recipe.name.toUpperCase().includes(letters.toUpperCase()) || recipe.tags.join('').includes(letters)
   })
 }
+
+function findNames(recipe,ingredientsData) {
+  recipe.ingredients.forEach(ingredient =>{
+    let correctIngredient= ingredientsData.find(ing =>{
+        return ingredient.id === ing.id
+      })    
+     
+      ingredient.name = correctIngredient.name
+
+    })
+    console.log(recipe)
+  }
+  
 
 hamburgerIcon.addEventListener('click', ()=>{
   navMenu.classList.remove('hidden');
