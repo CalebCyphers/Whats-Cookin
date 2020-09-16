@@ -219,7 +219,6 @@ describe('User', () => {
     const missingIngredients = recipe.ingredients.filter(item => {
       return !(pantryIngredients.includes(item.id));
     })
-
     expect(user1.checkPantry(recipe)).to.eql(missingIngredients);
   });
 

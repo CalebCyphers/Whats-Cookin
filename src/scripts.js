@@ -4,6 +4,7 @@ import Recipe from './recipe';
 import User from './user';
 import domUpdates from './domUpdates';
 
+let backToHomeButton = document.querySelector('.back-to-home');
 let myPantryButton = document.querySelector('.menu-my-pantry');
 let myRecipesButton = document.querySelector('.menu-my-upcoming-recipes');
 let myFavoritesButton = document.querySelector('.menu-favorites');
@@ -27,6 +28,10 @@ window.onload = function() {
   mergeFetchTimelines();
 };
 
+backToHomeButton.addEventListener('click', () => {
+  domUpdates.displayAllRecipes(recipesData,currentUser)
+});
+
 recipeSearch.addEventListener('keyup', ()=>{
   if(favButton.classList.contains('clicked')){
     domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'favoriteRecipes'),currentUser)
@@ -41,26 +46,12 @@ recipeSearch.addEventListener('keyup', ()=>{
   }
 });
 
-favButton.addEventListener('click', ()=>{
-  if(!favButton.classList.contains('clicked')) {
-    domUpdates.displayFavorites(findFavorites(currentUser,recipesData,'favoriteRecipes'))
-    favButton.classList.add('clicked')
-  }
-  else{
-    favButton.classList.remove('clicked')
-    domUpdates.displayAllRecipes(recipesData,currentUser)
-  }
+favButton.addEventListener('click', () => {
+    domUpdates.displayFavorites(findFavorites(currentUser,recipesData,'favoriteRecipes')); 
 });
 
 menuMyUpcomingRecipes.addEventListener('click',() =>{
-      if(!menuMyUpcomingRecipes.classList.contains('clicked')) {
-        domUpdates.displayUpcomingRecipes(currentUser,recipesData)
-        menuMyUpcomingRecipes.classList.add('clicked')
-      }
-      else{
-        menuMyUpcomingRecipes.classList.remove('clicked')
-    domUpdates.displayAllRecipes(recipesData,currentUser)
-      }
+   domUpdates.displayUpcomingRecipes(currentUser,recipesData)
 });
 
 myPantryButton.addEventListener('click', () => {
