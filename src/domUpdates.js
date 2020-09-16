@@ -1,10 +1,5 @@
-let favButton = document.querySelector('.view-favorites');
-let homeButton = document.querySelector('.home')
-let cardArea = document.querySelector('.all-cards');
+
 const recipeCards = document.querySelector('.all-cards');
-let pantryArea = document.querySelector('.pantry-cards');
-let recipeSearch = document.querySelector('.search-recipes-input');
-let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
 let recipeDisplay = document.querySelector('.recipe-display');
 
 let domUpdates = {
@@ -65,9 +60,9 @@ let domUpdates = {
     <h1>${cookable}</h1>
     <h1>${recipe.name}</h1>
     <div class="recipe-ingredients-with-cost">
-    <h2>Nessasary Ingredient</h2>
+    <h2>Necessary Ingredients</h2>
       <p class="popup-ingredients">${this.formatObjectsToDisplatCorrectly((recipe.ingredients))}</p>
-      <h3 class="pop-costs">${recipe.calculateCost()}</h3>
+      <h3 class="pop-costs">Costs ${recipe.calculateCost()} dollars to make </h3>
     </div>
     <p class="recipe-instructions">${trueInstructions}</p>
 </section>`
