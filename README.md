@@ -44,6 +44,8 @@ This project is meant to present the user with a display of recipes, from which 
 
 + Spies - how they work and how they are tested with a 'mock' object that represents `domUpdates {}` 
 
++ Project Board - our tickets were not modular enough in a way that we could close issues consistently on PRs.  We should have broken them down into smaller tasks and kept up with the project board in a way that would benefit our workflow.
+
 ### Next Steps
 
 + Fix the recipe popup so that the font, colors, and layout are more user-friendly
