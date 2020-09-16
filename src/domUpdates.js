@@ -52,8 +52,8 @@ let domUpdates = {
       
       cookable = 'You can cook this recipe!'
     } else {
-      cookable = `Can't cook this recipe 
-      you are missing <br>${this.formatObjectsToDisplatCorrectly((this.figureMissing(recipe, missinIng)))}` 
+      cookable = `Can't cook this recipe! <br>
+      You are missing: <br>${this.formatObjectsToDisplatCorrectly((this.figureMissing(recipe, missinIng)))}` 
 
     }
 
@@ -174,6 +174,7 @@ let domUpdates = {
   },
   formatObjectsToDisplatCorrectly(obj) {
     return obj.reduce((acc,curr) => {
+      console.log(curr)
       return acc += `${curr.quantity.amount} ${curr.quantity.unit} ${curr.name} <br>`
     },'')
   }
