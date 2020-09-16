@@ -35,7 +35,11 @@ This project is meant to present the user with a display of recipes, from which 
 
 ### Challenges
 
-+ Access
++ Planning and working with a codebase that had been set up with significant amounts of code, some of which needed a lot of refactoring.  Our team spent a majority of our time deciphering what the codebase was already managing well in terms of UI and JS, where code existed, and how to make the best use of our time moving forward in the process.  We felt stuck for the first few days while we were putting the pieces together, and attribute that to the delay of product progression overall.  Next time, we would plan more thoroughly and do some more inspecting of the codebase we're given.
+
++ Accessing data from the resolved promises of Fetch requests.  This challenge mostly pertains to figuring out when DOM methods and `scripts` functions would have access to the data from each fetch request.
+
++ Spies - how they work and how they are tested with a 'mock' object that represents `domUpdates {}` 
 
 ### Preview
 
