@@ -7,15 +7,7 @@ class Pantry {
       return ing.ingredient
     })
   }
-  // findRecipeIngredientsInPantry(recipe) {
-  //   // let currentPantryIds = this.getIdsOfPantryIngredients()
-  //   return recipe.ingredients.filter(ingredient => {
-  //     return ingredient
-  //   })
-  // }
-  // doesUserHaveRequiredIngredients(recipe) {
-  //  return this.findRecipeIngredientsInPantry(recipe).length === recipe.ingredients.length
-  // }
+ 
   findWhichIngredientsAreShort(recipe) {
     let notEnough = recipe.ingredients.filter(ing => {
       if (this.findIngredientInPantry(ing) === undefined) {
