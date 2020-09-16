@@ -11,33 +11,33 @@
   <body>
     <header class='main-header'>
       <div class="wrapper">
-        <img class="hamburger-menu" src="/hamburger-icon.png" alt="hamburger icon serving as menu button">
-        <img class="x-menu hidden" src="/images/x-icon.png" alt="x icon to be clicked when you are done viewing the menu options">
+        <img class="hamburger-menu" src="/hamburger-icon.png" tabindex="0" alt="open menu button">
+        <img class="x-menu hidden" src="/x-icon.png" tabindex="0" alt="close menu button">
       </div>
-      <h1 class="header-title">What's Cookin'?</h1>
+      <h1 class="header-title" tabindex="0">What's Cookin'?</h1>
       <section class="user-info">
-       <p class='user-name'> Welcome</p>
+       <p class='user-name' tabindex="0"> Welcome</p>
       </section>
     </header>
     <section class="open-menu-selections hidden">
       <article class="menu-my-pantry menu-selection hidden">
-        <h2 class="menu-my-pantry-title"><a href="./pantry.html">My Pantry</a></h2>
+        <h2 class="menu-my-pantry-title" tabindex="0"><a href="./pantry.html">My Pantry</a></h2>
       </article>
       <article class="menu-my-upcoming-recipes menu-selection hidden">
-        <h3 class="menu-my-upcoming-recipes-title">My Upcoming Recipes</h2>
+        <h3 class="menu-my-upcoming-recipes-title" tabindex="0">My Upcoming Recipes</h2>
       </article>
       <article class="menu-favorites menu-selection hidden">
-        <h3 class="view-favorites">Favorites</h2>
+        <h3 class="view-favorites" tabindex="0">Favorites</h2>
       </article>
     </section>
     <section class="page-title-and-search">
-      <h3 class="page-title">All Recipes</h3>
+      <h3 class="page-title" tabindex="0" >All Recipes</h3>
       <section class="search-recipes">
         <div class="search-wrapper">
-          <button class="search-button">
-            <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+          <button class="search-button" alt="search-icon">
+            <img class="search-icon" src="./images/search-icon.png" alt="search icon">
           </button>
-          <input class="search-recipes-input" type="text" placeholder="search recipes">
+          <input class="search-recipes-input" type="text" placeholder="search recipes" tabindex="0" alt="recipe search input">
         </div>
       </section>
     </section>
