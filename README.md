@@ -1,7 +1,6 @@
 ## What's Cookin'
 
-A front-end project by Taylor Johnson, Nicole Gooden, and Caleb Cyphers.
-**link to deployed site**
+A front-end project by [Taylor Johnson](https://github.com/taylorjohnson141), [Nicole Gooden](https://github.com/nicolegooden), and [Caleb Cyphers](https://github.com/CalebCyphers).
 
 ### Project Overview
 
