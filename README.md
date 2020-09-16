@@ -16,6 +16,16 @@ This project is meant to present the user with a display of recipes, from which 
 
 ### Installation
 
+1. Clone this repo to the local computer using `git clone` on the CLI. followed by the copied SSH link from the green `Code` button.
+
+1. Run `npm install` to install all NPM dependencies.
+
+1. From the terminal, run `npm run-script build` to allow the building of Webpack-related files.
+
+1. From the terminal, run `npm start` to get the server going. There will be confirmation in the form of a `Compiled successfully` message when this is complete.
+
+1. Click the link, `http://localhost: 8080/` to open what's running from the server in the browser.  If changes are saved from the code editor (Atom, VS Code, etc.), the live server will auto-update to reflect those changes.
+
 
 
 
