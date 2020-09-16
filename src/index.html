@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -6,69 +5,55 @@
     <title>Whats Cookin</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap' rel='stylesheet'>
     <link rel="page" href="./pantry.html">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
   </head>
   <body>
     <header class='main-header'>
       <div class="wrapper">
-        <img class="hamburger-menu" src="/hamburger-icon.png" alt="hamburger icon serving as menu button">
-        <img class="x-menu hidden" src="/x-icon.png" alt="x icon to be clicked when you are done viewing the menu options">
+        <img class="hamburger-menu" src="/hamburger-icon.png" tabindex="0" alt="open menu button">
+        <img class="x-menu hidden" src="./images/x-icon.png" tabindex="0" alt="close menu button">
       </div>
-      <h1 class="header-title">What's Cookin'?</h1>
+      <h1 class="header-title" tabindex="0">What's Cookin'?</h1>
       <section class="user-info">
-       <p class='user-name'> Welcome</p>
+       <p class='user-name' tabindex="0"> Welcome</p>
       </section>
     </header>
-    <section class="open-menu-selections x">
-      <article class="menu-my-pantry menu-selection x">
-        <h2 class="menu-my-pantry-title">My Pantry</h2>
+    <section class="open-menu-selections hidden">
+      <article class="menu-my-pantry menu-selection hidden">
+        <h2 class="menu-my-pantry-title" tabindex="0"><a href="./pantry.html">My Pantry</a></h2>
       </article>
-      <article class="menu-my-upcoming-recipes menu-selection">
-        <h3 class="menu-my-upcoming-recipes-title">My Upcoming Recipes</h2>
+      <article class="menu-my-upcoming-recipes menu-selection hidden">
+        <h3 class="menu-my-upcoming-recipes-title" tabindex="0">My Upcoming Recipes</h2>
       </article>
-      <article class="menu-favorites menu-selection ">
-        <h3 class="view-favorites">Favorites</h2>
+      <article class="menu-favorites menu-selection hidden">
+        <h3 class="view-favorites" tabindex="0">Favorites</h2>
       </article>
     </section>
     <section class="page-title-and-search">
-      <h3 class="page-title">All Recipes</h3>
+      <h3 class="page-title" tabindex="0" >All Recipes</h3>
       <section class="search-recipes">
         <div class="search-wrapper">
-          <button class="search-button">
-            <img class="search-icon" src="./images/search-icon.png" alt="search icon to the left of the search recipes input">
+          <button class="search-button" alt="search-icon">
+            <img class="search-icon" src="./images/search-icon.png" alt="search icon">
           </button>
-          <input class="search-recipes-input" type="text" placeholder="search recipes">
+          <input class="search-recipes-input" type="text" placeholder="search recipes" tabindex="0" alt="recipe search input">
         </div>
       </section>
     </section>
     <main class="main">
       <section class="all-cards">
-        <!-- <article class="single-recipe-card">
-          <article class="all-card-icons">
-            <img class="plus-icon card-icon" src="./images/plus-icon.png" alt="plus icon used to expand and show recipe details">
-            <div class="favorite card-icon"><div>
-          </article>
-          <article class="card-image-section">
-            <img class="card-image" src="https://www.onceuponachef.com/images/2018/03/Breakfast-Burritos.jpg" alt="sample display of breakfast burritos">
-          </article>
-          <article class="recipe-name-area">
-            <h2 class="recipe-name">Recipe Name</h2>
-          </article>
-        </article> -->
       </section>
     </main>
       <section class="recipe-display hidden">
         <section class="recipe-display-main">
-          <div class="recipe-display-left">
-            <div></div>
+          <img class="x-menu" src="/x-icon.png" alt="x icon to be clicked when you are done viewing the recipe info">
+          <h2>Recipe Instructions</h2>
+          <div class="recipe-ingredients-with-cost">
+            <h3 class="popup-ingredients"></h3>
+            <h3 class="pop-costs"></h3>
           </div>
-          <div class="recipe-display-right">
-            <h2>Recipe Instructions</h2>
-            <p>some recipe instructions</p>
-            <p>some recipe instructions</p>
-            <p>some recipe instructions</p>
-          </div>
-        </section>
+          <p class="recipe-instructions"></p>
+      </section>
       </section>
     <script type='text/javascript' src='./pantry.js'></script>
     <script type='text/javascript' src='./user.js'></script>

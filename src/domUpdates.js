@@ -5,12 +5,12 @@ const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 let recipeSearch = document.querySelector('.search-recipes-input');
 let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
+let recipeDisplay = document.querySelector('.recipe-display');
 
 let domUpdates = {
   randomNumber: Math.floor(Math.random() * 49) + 1,
 
-  
-  displayAllRecipes(recipes,currentUser) {
+   displayAllRecipes(recipes, currentUser) {
     
     let favorites = currentUser.favoriteRecipes
 
@@ -38,6 +38,48 @@ let domUpdates = {
        </article>`
     })
 
+  },
+
+  displayRecipeInfo(recipe,cookables,missinIng) {
+    let cookable; 
+    
+    let isRecipeCookable = cookables.find(recipe =>{
+      return recipe.name === recipe
+    }) !== undefined 
+
+ 
+    if (isRecipeCookable) {
+      
+      cookable = 'You can cook this recipe!'
+    } else {
+      cookable = `Can't cook this recipe 
+      you are missing <br>${this.formatObjectsToDisplatCorrectly((this.figureMissing(recipe, missinIng)))}` 
+
+    }
+
+    let trueInstructions = recipe.instructions.map(instruction => {
+      return instruction.instruction;
+    }).join(',')
+    recipeDisplay.innerHTML = ''
+    recipeDisplay.innerHTML += 
+    `<section class="recipe-display-main">
+    <h1>${cookable}</h1>
+    <h1>${recipe.name}</h1>
+    <div class="recipe-ingredients-with-cost">
+    <h2>Nessasary Ingredient</h2>
+      <p class="popup-ingredients">${this.formatObjectsToDisplatCorrectly((recipe.ingredients))}</p>
+      <h3 class="pop-costs">${recipe.calculateCost()}</h3>
+    </div>
+    <p class="recipe-instructions">${trueInstructions}</p>
+</section>`
+  },
+
+  showRecipePopup() {
+    recipeDisplay.classList.remove('hidden');
+  },
+
+  hideRecipePopup() {
+    recipeDisplay.classList.add('hidden');
   },
   
   greetUser(user) {
@@ -121,6 +163,19 @@ let domUpdates = {
       </article>
     </article>`
     })
+  },
+  figureMissing(recipe, missinIng) {
+    let correctRecipe = missinIng.find(rep =>{
+      return recipe.name === rep.name
+    }) 
+    console.log(correctRecipe)
+
+    return correctRecipe.NotEnough
+  },
+  formatObjectsToDisplatCorrectly(obj) {
+    return obj.reduce((acc,curr) => {
+      return acc += `${curr.quantity.amount} ${curr.quantity.unit} ${curr.name} <br>`
+    },'')
   }
 }
   // function viewFavorites() {

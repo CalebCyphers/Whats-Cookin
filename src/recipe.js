@@ -18,7 +18,7 @@ class Recipe {
         }
       })
     });
-    return costCounter;
+    return costCounter / 100;
   }
   returnInstructions() {
     return this.instructions
