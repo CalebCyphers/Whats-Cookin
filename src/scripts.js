@@ -12,6 +12,15 @@ let ingredientsData;
 let currentUser;
 let favorites;
 
+let myPantryButton = document.querySelector('.menu-my-pantry')
+let myRecipesButton = document.querySelector('.menu-my-upcoming-recipes')
+let myFavoritesButton = document.querySelector('.menu-favorites')
+
+
+
+let navMenu = document.querySelector('.open-menu-selections')
+let hamburgerIcon = document.querySelector('.hamburger-menu')
+let closeIcon = document.querySelector('.x-menu')
 let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
@@ -203,5 +212,22 @@ function filterInputs(letters,ingredientsData,currentUserProperty){
   })
 }
 
+hamburgerIcon.addEventListener('click', ()=>{
+  navMenu.classList.remove('hidden');
+  hamburgerIcon.classList.add('hidden');
+  closeIcon.classList.remove('hidden');
+  myPantryButton.classList.remove('hidden');
+  myFavoritesButton.classList.remove('hidden');
+  myRecipesButton.classList.remove('hidden');
+})
+
+closeIcon.addEventListener('click', ()=>{
+  navMenu.classList.add('hidden');
+  hamburgerIcon.classList.remove('hidden');
+  closeIcon.classList.add('hidden');
+  myPantryButton.classList.add('hidden');
+  myFavoritesButton.classList.add('hidden');
+  myRecipesButton.classList.add('hidden');
+})
 
 
