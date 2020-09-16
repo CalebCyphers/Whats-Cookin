@@ -1,140 +1,130 @@
-import './css/base.scss';
 import './css/styles.scss';
-
-
 import Pantry from './pantry';
 import Recipe from './recipe';
 import User from './user';
-import Cookbook from './cookbook';
 import domUpdates from './domUpdates';
-let recipeDatas;
+
+let backToHomeButton = document.querySelector('.back-to-home');
+let myPantryButton = document.querySelector('.menu-my-pantry');
+let myRecipesButton = document.querySelector('.menu-my-upcoming-recipes');
+let myFavoritesButton = document.querySelector('.menu-favorites');
+let navMenu = document.querySelector('.open-menu-selections');
+let hamburgerIcon = document.querySelector('.hamburger-menu');
+let closeIcon = document.querySelector('.x-menu');
+let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
+let favButton = document.querySelector('.view-favorites');
+let recipeCards = document.querySelector('.all-cards');
+let recipeSearch = document.querySelector('.search-recipes-input');
+let recipeDisplay = document.querySelector('.recipe-display');
+let recipesData;
 let ingredientsData;
 let currentUser
 let favorites;
 let pantry;
-let cookAbleRecipies;
+let cookAbleRecipes;
 let missingIng;
-let myPantryButton = document.querySelector('.menu-my-pantry')
-let myRecipesButton = document.querySelector('.menu-my-upcoming-recipes')
-let myFavoritesButton = document.querySelector('.menu-favorites')
 
+window.onload = function() {
+  mergeFetchTimelines();
+};
 
+backToHomeButton.addEventListener('click', () => {
+  domUpdates.displayAllRecipes(recipesData,currentUser)
+});
 
-let navMenu = document.querySelector('.open-menu-selections')
-let hamburgerIcon = document.querySelector('.hamburger-menu')
-let closeIcon = document.querySelector('.x-menu')
-let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
-let favButton = document.querySelector('.view-favorites');
-let homeButton = document.querySelector('.home')
-let cardArea = document.querySelector('.all-cards');
-const recipeCards = document.querySelector('.all-cards');
-let pantryArea = document.querySelector('.pantry-cards');
-let recipeSearch = document.querySelector('.search-recipes-input')
-let recipeDisplay = document.querySelector('.recipe-display');
 recipeSearch.addEventListener('keyup', ()=>{
-  if(favButton.classList.contains('clicked')){
+  if (favButton.classList.contains('clicked')) {
     domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'favoriteRecipes'),currentUser)
-
-  }
-  else if(menuMyUpcomingRecipes.classList.contains('clicked')){
+  } else if (menuMyUpcomingRecipes.classList.contains('clicked')) {
     domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'recipesToCook'),currentUser)
+  } else {
+    domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),currentUser)
+  }
+});
 
-  }
-  else{
-  domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),currentUser)
-  }
-})
-favButton.addEventListener('click', ()=>{
-  if(!favButton.classList.contains('clicked')) {
-    domUpdates.displayFavorites(findFavorites(currentUser,recipeDatas,'favoriteRecipes'))
-    favButton.classList.add('clicked')
-  }
-  else{
-    favButton.classList.remove('clicked')
-    domUpdates.displayAllRecipes(recipeDatas,currentUser)
-  }
-})
-menuMyUpcomingRecipes.addEventListener('click',() =>{
-      if(!menuMyUpcomingRecipes.classList.contains('clicked')) {
-        domUpdates.displayUpcomingRecipes(currentUser,recipeDatas)
-        menuMyUpcomingRecipes.classList.add('clicked')
-      }
-      else{
-        menuMyUpcomingRecipes.classList.remove('clicked')
-    domUpdates.displayAllRecipes(recipeDatas,currentUser)
-      }
-})
+favButton.addEventListener('click', () => {
+  domUpdates.displayFavorites(findFavorites(currentUser,recipesData,'favoriteRecipes')); 
+});
+
+menuMyUpcomingRecipes.addEventListener('click', () =>{
+  domUpdates.displayUpcomingRecipes(currentUser, recipesData)
+});
 
 myPantryButton.addEventListener('click', () => {
   domUpdates.displayPantry(pantry)
-})
+});
+
 recipeDisplay.addEventListener('click', domUpdates.hideRecipePopup);
 
 recipeCards.addEventListener('click', () => {
-if(event.target.classList.contains('star-icon')) {
-  toggleFavorites(event)
-}
-if (event.target.classList.contains('plus-icon')) {
-  addToUpcomingRecipes(currentUser, recipeDatas);
-}
-if (event.target.classList.contains('card-image')) {
-  domUpdates.showRecipePopup();
-  let chosenRecipe = event.target.closest('.single-recipe-card')
-  findNames(createRecipe(chosenRecipe.id),ingredientsData)
-  domUpdates.displayRecipeInfo(createRecipe(chosenRecipe.id),cookAbleRecipies,missingIng)
-}
-})
+  if (event.target.classList.contains('star-icon')) {
+    toggleFavorites(event)
+  }
+  if (event.target.classList.contains('plus-icon')) {
+    addToUpcomingRecipes(currentUser, recipesData);
+  }
+  if (event.target.classList.contains('card-image')) {
+    domUpdates.showRecipePopup();
+    let chosenRecipe = event.target.closest('.single-recipe-card')
+    findNames(createRecipe(chosenRecipe.id),ingredientsData)
+    domUpdates.displayRecipeInfo(createRecipe(chosenRecipe.id),cookAbleRecipes,missingIng)
+  }
+});
 
-function getRecipeIngredientNames() {
-  //access the ingredients from ingredientData
-  //compare each ingredient and see if the ingredient
-  //is included in the recipe.ingredients (by ID)
-  //if true => returns the ingredient that matches
-  //set those included ingredients to a variable
-  //for each of those found ingredients, reassign
-  //values by creating new keys
-}
+hamburgerIcon.addEventListener('click', ()=>{
+  navMenu.classList.remove('hidden');
+  hamburgerIcon.classList.add('hidden');
+  closeIcon.classList.remove('hidden');
+  myPantryButton.classList.remove('hidden');
+  myFavoritesButton.classList.remove('hidden');
+  myRecipesButton.classList.remove('hidden');
+});
 
-function toggleFavorites(event){
-  if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
+closeIcon.addEventListener('click', ()=>{
+  navMenu.classList.add('hidden');
+  hamburgerIcon.classList.remove('hidden');
+  closeIcon.classList.add('hidden');
+  myPantryButton.classList.add('hidden');
+  myFavoritesButton.classList.add('hidden');
+  myRecipesButton.classList.add('hidden');
+});
+
+function toggleFavorites(event) {
+  if (event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg") {
     event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
     addToFavorites(event)
-  }else{   
+  } else {   
     removeFromFavorites(event)
-    event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" }
-}
-function addToFavorites(event){
-let recipe = event.target.closest('.single-recipe-card')
-currentUser.addToFavorites(recipe.id)
-}
+    event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" 
+  }
+};
+
+function addToFavorites(event) {
+  let recipe = event.target.closest('.single-recipe-card')
+  currentUser.addToFavorites(recipe.id)
+};
+
 function removeFromFavorites(event) {
   favorites = currentUser.favoriteRecipes
   let recipe = event.target.closest('.single-recipe-card')
-  if(favorites.includes(recipe.id)){
+  if (favorites.includes(recipe.id)) {
     currentUser.removeFromFavorites(recipe.id)
   }
-}
+};
 
-// window.onload = onStartup();
-// window.onload = showDomUpdates(recipe);
-window.onload = function() {
-  mergeFetchTimelines()
-}
 function createUser(usersData) {
   let currentUser = usersData.find(user => {
     let parsedID = parseInt(user.id);
     return parsedID === domUpdates.randomNumber
   })
   return new User(currentUser.id,currentUser.name,currentUser.pantry)
-}
+};
 
 function createRecipe(id) {
-  let currentRecipe = recipeDatas.find(recipe => {
+  let currentRecipe = recipesData.find(recipe => {
     return recipe.id == id;
   })
-  console.log(currentRecipe)
   return new Recipe(currentRecipe, ingredientsData)
-
 };
 
 function addToUpcomingRecipes(currentUser) {
@@ -147,143 +137,132 @@ function createPantry(currentUser, ingredientsData) {
     let currentIngredient = ingredientsData.find(ingredient => {
       return pantryItem.ingredient === ingredient.id;
     })
-    if(!currentIngredient.name ){
+    if (!currentIngredient.name ) {
       return
     }
-    pantryItem.amount = Math.ceil(pantryItem.amount)
-     pantryItem.name = currentIngredient.name;
-    pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
+    refigurePantry(pantryItem, currentIngredient) 
   })
-  console.log('our pantry',currentUser.pantry)
-  //what if we made a class here?
   return new Pantry(currentUser.pantry)
-}
+};
 
 function grabRecipes() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
-  .then(response => response.json())
-  .then(recipeObject => {
-    recipeDatas = recipeObject.recipeData
-  })
-  .catch(err => {
-    console.log(err);
-    alert('Sorry, the recipes failed to load. Try again later.')})
-}
+    .then(response => response.json())
+    .then(recipeObject => {
+      recipesData = recipeObject.recipeData
+    })
+    .catch(err => {
+      console.log(err);
+      alert('Sorry, the recipes failed to load. Try again later.')
+    })
+};
 
 function grabUsers() {
-  return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData',)
-  .then(response => {
-    return response.json()
-  })
-  .then(data => {
-    domUpdates.greetUser(data.wcUsersData[domUpdates.randomNumber -1])
-     return data.wcUsersData;
-      })
-  .catch(err => {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData')
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      domUpdates.greetUser(data.wcUsersData[domUpdates.randomNumber - 1])
+      return data.wcUsersData;
+    })
+    .catch(err => {
       console.log(err);
       alert('Sorry, the user information failed to load. Try again later.');
-  })
-}
-  function grabIngredients() {
+    })
+};
+
+function grabIngredients() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/ingredients/ingredientsData')
-  .then(response => {
+    .then(response => {
       return response.json()
-  }).then(ingredientData => {
+    }).then(ingredientData => {
       return ingredientData.ingredientsData;
-      })
-  .catch(err => {
+    })
+    .catch(err => {
       console.log(err);
       alert('Sorry, the ingredients failed to load. Try again later.');    
-})
-}
+    })
+};
+
 function mergeFetchTimelines() {
- Promise.all([grabUsers(), grabIngredients(), grabRecipes()])
- .then(values => {
-   let usersData = values[0];
-   ingredientsData = values[1];
-    currentUser = createUser(usersData)
-    domUpdates.displayAllRecipes(recipeDatas,currentUser);
-    pantry = createPantry(currentUser,ingredientsData)
-    missingIng = findWhichIngredientsAreMissing(recipeDatas)
-    console.log('add',missingIng)
-    cookAbleRecipies = findRecipiesCanCook(missingIng)
-    console.log('what can we cook?',cookAbleRecipies)
- })
-  .catch(err => {
-      console.log(err);
+  Promise.all([grabUsers(), grabIngredients(), grabRecipes()])
+    .then(values => {
+      let usersData = values[0];
+      ingredientsData = values[1];
+      currentUser = createUser(usersData)
+      domUpdates.displayAllRecipes(recipesData, currentUser);
+      pantry = createPantry(currentUser, ingredientsData)
+      missingIng = findWhichIngredientsAreMissing(recipesData)
+      cookAbleRecipes = findRecipiesCanCook(missingIng)
+    })
+    .catch(err => {
+     console.log(err);
       alert('Sorry, the information failed to load. Try again later.');
-  }) 
-}
-function findFavorites(currentUser,recipeDatas,currentUserProperty) {
+    }) 
+};
+
+function findFavorites(currentUser, recipesData, currentUserProperty) {
   let ids = currentUser[currentUserProperty]
-  let favoriteRecipies = recipeDatas.filter(recipe =>{
+  let favoriteRecipies = recipesData.filter(recipe =>{
     return ids.includes(String(recipe.id))
   })
   return favoriteRecipies
-}
-function findRecipiesCanCook(missingIng){
+};
 
+function findRecipiesCanCook(missingIng) {
   return missingIng.filter(recipe =>{
-     return recipe.NotEnough.length === 0
+    return recipe.NotEnough.length === 0
   })
-}
-function findWhichIngredientsAreMissing(recipeDatas) {
-  return recipeDatas.map(recipe =>{
-  return {name :recipe.name, id:recipe.id,ingredients:recipe.ingredients, NotEnough:pantry.findWhichIngredientsAreShort(recipe)}
+};
+
+function refigurePantry(pantryItem, currentIngredient) {
+  pantryItem.amount = Math.ceil(pantryItem.amount)
+  pantryItem.name = currentIngredient.name;
+  pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
+};
+
+function findWhichIngredientsAreMissing(recipesData) {
+  return recipesData.map(recipe =>{
+    return {name: recipe.name, id: recipe.id, ingredients: recipe.ingredients, NotEnough: pantry.findWhichIngredientsAreShort(recipe)}
  })
-}
-function filterInputs(letters,ingredientsData,currentUserProperty){
-  if(letters === ''){
-    return 
+};
+
+function filterInputs(letters, ingredientsData, currentUserProperty) {
+  if (letters === '') {
+    return recipesData
   }
   letters = letters.trim()
   let arrayToFilter;
-  if(currentUserProperty === undefined){
-     arrayToFilter = recipeDatas
-  }
-  else{
-   arrayToFilter = findFavorites(currentUser,recipeDatas,currentUserProperty);
-  }
-  return arrayToFilter.filter(recipe => {
+  if (currentUserProperty === undefined) {
+    arrayToFilter = recipesData;
+  } else {
+    arrayToFilter = findFavorites(currentUser, recipesData, currentUserProperty);
+  } 
+  return findLettersInRecipes(arrayToFilter, letters, ingredientsData)
+};
 
-    let correctIngredient  = ingredientsData.find(ingredient =>{ 
+function findLettersInRecipes (arrayToFilter, letters, ingredientsData) {
+  return arrayToFilter.filter(recipe => {
+    let correctIngredient  = ingredientsData.find(ingredient => { 
       return recipe.ingredients.find(recIngredients => {
         return recIngredients.id === ingredient.id
       })
-     })
+    })
     return correctIngredient.name.toUpperCase().includes(letters.toUpperCase()) || recipe.name.toUpperCase().includes(letters.toUpperCase()) || recipe.tags.join('').includes(letters)
   })
-}
+};
 
-function findNames(recipe,ingredientsData) {
+function findNames(recipe, ingredientsData) {
   recipe.ingredients.forEach(ingredient =>{
-    let correctIngredient= ingredientsData.find(ing =>{
-        return ingredient.id === ing.id
-      })    
-     
-      ingredient.name = correctIngredient.name
-
-    })
-    console.log(recipe)
-  }
+    let correctIngredient = ingredientsData.find(ing =>{
+      return ingredient.id === ing.id
+    })    
+    ingredient.name = correctIngredient.name
+  })
+};
   
 
-hamburgerIcon.addEventListener('click', ()=>{
-  navMenu.classList.remove('hidden');
-  hamburgerIcon.classList.add('hidden');
-  closeIcon.classList.remove('hidden');
-  myPantryButton.classList.remove('hidden');
-  myFavoritesButton.classList.remove('hidden');
-  myRecipesButton.classList.remove('hidden');
-})
 
-closeIcon.addEventListener('click', ()=>{
-  navMenu.classList.add('hidden');
-  hamburgerIcon.classList.remove('hidden');
-  closeIcon.classList.add('hidden');
-  myPantryButton.classList.add('hidden');
-  myFavoritesButton.classList.add('hidden');
-  myRecipesButton.classList.add('hidden');
-})
 
 

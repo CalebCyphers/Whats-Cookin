@@ -1,7 +1,6 @@
 ## What's Cookin'
 
-A front-end project by Taylor Johnson, Nicole Gooden, and Caleb Cyphers.
-**link to deployed site**
+A front-end project by [Taylor Johnson](https://github.com/taylorjohnson141), [Nicole Gooden](https://github.com/nicolegooden), and [Caleb Cyphers](https://github.com/CalebCyphers).
 
 ### Project Overview
 
@@ -29,6 +28,13 @@ This project is meant to present the user with a display of recipes, from which 
 
 ### Preview
 
+Desktop to Tablet to Mobile Responsiveness
+
+![gif showing responsive design from desktop, to tablet, to mobile](http://g.recordit.co/CRvCSzJ5UY.gif)
+
+Functionality
+
+![gif showing user interaction across displays](http://g.recordit.co/ObVuaoi3vf.gif)
 
 ### Wins
 

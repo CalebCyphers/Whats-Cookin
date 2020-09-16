@@ -7,15 +7,7 @@ class Pantry {
       return ing.ingredient
     })
   }
-  // findRecipeIngredientsInPantry(recipe) {
-  //   // let currentPantryIds = this.getIdsOfPantryIngredients()
-  //   return recipe.ingredients.filter(ingredient => {
-  //     return ingredient
-  //   })
-  // }
-  // doesUserHaveRequiredIngredients(recipe) {
-  //  return this.findRecipeIngredientsInPantry(recipe).length === recipe.ingredients.length
-  // }
+ 
   findWhichIngredientsAreShort(recipe) {
     let notEnough = recipe.ingredients.filter(ing => {
       if (this.findIngredientInPantry(ing) === undefined) {
@@ -29,7 +21,7 @@ class Pantry {
   findAmountMissing(recipe) {
     let missingIngredients = this.findWhichIngredientsAreShort(recipe)
     return missingIngredients.reduce((finalArray, ingredient) => {
-      finalArray.push({ name: ingredient.name, facts: { id: ingredient.id, amountMissing: (ingredient.quantity.amount - this.findIngredientInPantry(ingredient).amount).toFixed(2)}})
+      finalArray.push({ name: ingredient.name, facts: { id: ingredient.id, amountMissing: parseFloat(ingredient.quantity.amount - this.findIngredientInPantry(ingredient).amount)}})
       return finalArray
     }, [])
   }

@@ -1,27 +1,17 @@
-let favButton = document.querySelector('.view-favorites');
-let homeButton = document.querySelector('.home')
-let cardArea = document.querySelector('.all-cards');
+
 const recipeCards = document.querySelector('.all-cards');
-let pantryArea = document.querySelector('.pantry-cards');
-let recipeSearch = document.querySelector('.search-recipes-input');
-let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
 let recipeDisplay = document.querySelector('.recipe-display');
 
 let domUpdates = {
   randomNumber: Math.floor(Math.random() * 49) + 1,
 
    displayAllRecipes(recipes, currentUser) {
-    
-    let favorites = currentUser.favoriteRecipes
-
-    if (recipeCards === null ) {
-      return 
-    }
-    recipeCards.innerHTML = ''
+    let favorites = currentUser.favoriteRecipes;
+    recipeCards.innerHTML = '';
     recipes.forEach(recipe => {
       let src = "https://image.flaticon.com/icons/svg/149/149222.svg"
       if (favorites !== undefined && favorites.includes(String(recipe.id) )) {
-        src = "https://image.flaticon.com/icons/svg/148/148841.svg"
+        src = "https://image.flaticon.com/icons/svg/148/148841.svg";
       }
       recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
          <article class="all-card-icons">
@@ -36,41 +26,34 @@ let domUpdates = {
          </article>
        </article>`
     })
-
   },
 
-  displayRecipeInfo(recipe,cookables,missinIng) {
+  displayRecipeInfo(recipe, cookables, missingIng) {
     let cookable; 
-    
-    let isRecipeCookable = cookables.find(recipe =>{
-      return recipe.name === recipe
-    }) !== undefined 
-
- 
+    let isRecipeCookable = cookables.find(cookableRecipe =>{
+      return recipe.name === cookableRecipe.name
+    }) !== undefined; 
     if (isRecipeCookable) {
-      
-      cookable = 'You can cook this recipe!'
+      cookable = 'You can cook this recipe!';
     } else {
       cookable = `Can't cook this recipe! <br>
-      You are missing: <br>${this.formatObjectsToDisplatCorrectly((this.figureMissing(recipe, missinIng)))}` 
-
+      You are missing: <br>${this.formatObjectsToDisplatCorrectly((this.figureMissing(recipe, missingIng)))}`; 
     }
-
     let trueInstructions = recipe.instructions.map(instruction => {
       return instruction.instruction;
-    }).join('<br>')
-    recipeDisplay.innerHTML = ''
+    }).join('<br>');
+    recipeDisplay.innerHTML = '';
     recipeDisplay.innerHTML += 
     `<section class="recipe-display-main">
     <h1>${cookable}</h1>
     <h1>${recipe.name}</h1>
     <div class="recipe-ingredients-with-cost">
-    <h2>Nessasary Ingredient</h2>
+    <h2>Necessary Ingredients</h2>
       <p class="popup-ingredients">${this.formatObjectsToDisplatCorrectly((recipe.ingredients))}</p>
-      <h3 class="pop-costs">${recipe.calculateCost()}</h3>
+      <h3 class="pop-costs">Costs ${recipe.calculateCost()} dollars to make </h3>
     </div>
     <p class="recipe-instructions">${trueInstructions}</p>
-</section>`
+</section>`;
   },
 
   showRecipePopup() {
@@ -106,8 +89,6 @@ let domUpdates = {
     });
   },
 
-
-
     displayUpcomingRecipes(currentUser, recipeDatas) {
       if (currentUser.recipesToCook.length === 0) {
         return 
@@ -120,9 +101,7 @@ let domUpdates = {
       if (favorites !== undefined && favorites.includes(String(recipeDataPoint.id) )) {
         src = "https://image.flaticon.com/icons/svg/148/148841.svg"
      }
-
         if (currentUser.recipesToCook.includes(String(recipeDataPoint.id))) {
-
           recipeCards.innerHTML += `<article id = ${recipeDataPoint.id} class="single-recipe-card ">
           <article class="all-card-icons">
             <img class="plus-icon card-icon" tabindex="0" src="./images/plus-icon.png" alt="show recipe details">
@@ -142,9 +121,8 @@ let domUpdates = {
 
   displayFavorites(favorites) {
     if (favorites.length === 0 ) {
-      return
+      return;
     }
-    
     recipeCards.innerHTML = ''
     favorites.forEach(recipe =>{
       recipeCards.innerHTML += `<article id = ${recipe.id} class="single-recipe-card ">
@@ -161,21 +139,19 @@ let domUpdates = {
     </article>`
     })
   },
-  figureMissing(recipe, missinIng) {
-    let correctRecipe = missinIng.find(rep =>{
-      return recipe.name === rep.name
-    }) 
-    console.log(correctRecipe)
 
-    return correctRecipe.NotEnough
+  figureMissing(recipe, missingIng) {
+    let correctRecipe = missingIng.find(rep =>{
+      return recipe.name === rep.name;
+    }) 
+    return correctRecipe.NotEnough;
   },
+
   formatObjectsToDisplatCorrectly(obj) {
-    return obj.reduce((acc,curr) => {
-      console.log(curr)
-      return acc += `${curr.quantity.amount} ${curr.quantity.unit} ${curr.name} <br>`
-    },'')
+    return obj.reduce((acc, curr) => {
+      return acc += `${curr.quantity.amount} ${curr.quantity.unit} ${curr.name} <br>`;
+    }, '')
   }
 }
-
 
 export default domUpdates;
