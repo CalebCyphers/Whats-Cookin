@@ -30,11 +30,11 @@ This project is meant to present the user with a display of recipes, from which 
 
 Desktop to Tablet to Mobile Responsiveness
 
-![gif showing responsive design from desktop, to tablet, to mobile](http://i.imgur.com/RrvkEC7.gifv)
+![gif showing responsive design from desktop, to tablet, to mobile](http://i.imgur.com/RrvkEC7.gif)
 
 Functionality
 
-![gif showing user interaction across displays](http://i.imgur.com/yz2jrwv.gifv)
+![gif showing user interaction across displays](http://i.imgur.com/yz2jrwv.gif)
 
 ### Wins
 
