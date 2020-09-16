@@ -7,9 +7,6 @@ let domUpdates = {
 
    displayAllRecipes(recipes, currentUser) {
     let favorites = currentUser.favoriteRecipes;
-    if (recipeCards === null ) {
-      return ;
-    }
     recipeCards.innerHTML = '';
     recipes.forEach(recipe => {
       let src = "https://image.flaticon.com/icons/svg/149/149222.svg"
