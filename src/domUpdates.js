@@ -5,12 +5,12 @@ const recipeCards = document.querySelector('.all-cards');
 let pantryArea = document.querySelector('.pantry-cards');
 let recipeSearch = document.querySelector('.search-recipes-input');
 let menuMyUpcomingRecipes = document.querySelector('.menu-my-upcoming-recipes-title');
+let recipeDisplay = document.querySelector('.recipe-display');
 
 let domUpdates = {
   randomNumber :  Math.floor(Math.random() * 49) + 1,
 
-  
-   displayAllRecipes(recipes,currentUser) {
+   displayAllRecipes(recipes, currentUser) {
     
     let favorites = currentUser.favoriteRecipes
 
@@ -38,6 +38,30 @@ let domUpdates = {
        </article>`
       })
 
+  },
+
+  displayRecipeInfo(recipe, ingredients) {
+    let trueInstructions = recipe.instructions.map(instruction => {
+      return instruction.instruction;
+    }).join(',')
+
+    recipeDisplay.innerHTML += 
+    `<section class="recipe-display-main">
+    <h1>${recipe.name}</h1>
+    <div class="recipe-ingredients-with-cost">
+      <p class="popup-ingredients">${JSON.stringify(recipe.ingredients)}</p>
+      <h3 class="pop-costs">${recipe.calculateCost()}</h3>
+    </div>
+    <p class="recipe-instructions">${trueInstructions}</p>
+</section>`
+  },
+
+  showRecipePopup() {
+    recipeDisplay.classList.remove('hidden');
+  },
+
+  hideRecipePopup() {
+    recipeDisplay.classList.add('hidden');
   },
   
    greetUser(user) {
