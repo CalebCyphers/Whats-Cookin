@@ -27,6 +27,9 @@ This project is meant to present the user with a display of recipes, from which 
 
 1. Click the link, `http://localhost: 8080/` to open what's running from the server in the browser.  If changes are saved from the code editor (Atom, VS Code, etc.), the live server will auto-update to reflect those changes.
 
+### Preview
+
+
 ### Wins
 
 + Fetch requests (GET) are resolved without any crashes
@@ -41,11 +44,15 @@ This project is meant to present the user with a display of recipes, from which 
 
 + Spies - how they work and how they are tested with a 'mock' object that represents `domUpdates {}` 
 
-### Preview
+### Next Steps
 
-
-
-
++ Fix the recipe popup so that the font, colors, and layout are more user-friendly
++ Refactor our functions for better readability
++ Create a hover state so a cursor appears when a user hovers over a clickable element
++ Make UI more sensible and straightforward, i.e. 
+    + Make it known that the recipe image, when clicked, will display that recipe's popup
+    + Add a confirmation that a recipe has been added to the upcoming recipes when a recipe card's `+` icon is clicked.
+    + Add a 'Back to Home' button rather than double clicking `Favorites` to return to the display of all fetched recipes
 
 
 
