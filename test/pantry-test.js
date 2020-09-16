@@ -127,7 +127,7 @@ describe('Pantry', () => {
 
   it('should determine the amount of ingredients still needed to cook a given meal', () => {
     let result = testPantry.findAmountMissing(testRecipeData[0]);
-    expect(result).to.deep.equal([{ name: 'all purpose flour', facts: { id: 11, amountMissing: 0.5 } }]);
+    expect(result).to.deep.equal([{ name: 'all purpose flour', facts: { id: 11, amountMissing: 0.50 } }]);
   });
 
   it('should determine how much it will cost to buy the necessary ingredients needed to cook a given meal', () => {
@@ -139,7 +139,7 @@ describe('Pantry', () => {
     let result = testPantry.addNecessaryIngredients(testRecipeData[0]);
     const pantryItem = [{
       "ingredient": 11,
-      "amount": .5
+      "amount": .50
     }]
 
     expect(result).to.deep.equal(pantryItem);

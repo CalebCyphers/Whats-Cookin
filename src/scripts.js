@@ -33,25 +33,21 @@ backToHomeButton.addEventListener('click', () => {
 });
 
 recipeSearch.addEventListener('keyup', ()=>{
-  if(favButton.classList.contains('clicked')){
+  if (favButton.classList.contains('clicked')) {
     domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'favoriteRecipes'),currentUser)
-
-  }
-  else if(menuMyUpcomingRecipes.classList.contains('clicked')){
+  } else if (menuMyUpcomingRecipes.classList.contains('clicked')) {
     domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData,'recipesToCook'),currentUser)
-
-  }
-  else{
-  domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),currentUser)
+  } else {
+    domUpdates.displayAllRecipes(filterInputs(recipeSearch.value,ingredientsData),currentUser)
   }
 });
 
 favButton.addEventListener('click', () => {
-    domUpdates.displayFavorites(findFavorites(currentUser,recipesData,'favoriteRecipes')); 
+  domUpdates.displayFavorites(findFavorites(currentUser,recipesData,'favoriteRecipes')); 
 });
 
-menuMyUpcomingRecipes.addEventListener('click',() =>{
-   domUpdates.displayUpcomingRecipes(currentUser,recipesData)
+menuMyUpcomingRecipes.addEventListener('click', () =>{
+  domUpdates.displayUpcomingRecipes(currentUser, recipesData)
 });
 
 myPantryButton.addEventListener('click', () => {
@@ -61,7 +57,7 @@ myPantryButton.addEventListener('click', () => {
 recipeDisplay.addEventListener('click', domUpdates.hideRecipePopup);
 
 recipeCards.addEventListener('click', () => {
-  if(event.target.classList.contains('star-icon')) {
+  if (event.target.classList.contains('star-icon')) {
     toggleFavorites(event)
   }
   if (event.target.classList.contains('plus-icon')) {
@@ -94,23 +90,24 @@ closeIcon.addEventListener('click', ()=>{
 });
 
 function toggleFavorites(event) {
-  if(event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg"){
+  if (event.target.src === "https://image.flaticon.com/icons/svg/149/149222.svg") {
     event.target.src =   "https://image.flaticon.com/icons/svg/148/148841.svg"
     addToFavorites(event)
-  }else{   
+  } else {   
     removeFromFavorites(event)
-    event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" }
+    event.target.src =  "https://image.flaticon.com/icons/svg/149/149222.svg" 
+  }
 };
 
 function addToFavorites(event) {
-let recipe = event.target.closest('.single-recipe-card')
-currentUser.addToFavorites(recipe.id)
+  let recipe = event.target.closest('.single-recipe-card')
+  currentUser.addToFavorites(recipe.id)
 };
 
 function removeFromFavorites(event) {
   favorites = currentUser.favoriteRecipes
   let recipe = event.target.closest('.single-recipe-card')
-  if(favorites.includes(recipe.id)){
+  if (favorites.includes(recipe.id)) {
     currentUser.removeFromFavorites(recipe.id)
   }
 };
@@ -140,71 +137,72 @@ function createPantry(currentUser, ingredientsData) {
     let currentIngredient = ingredientsData.find(ingredient => {
       return pantryItem.ingredient === ingredient.id;
     })
-    if(!currentIngredient.name ){
+    if (!currentIngredient.name ) {
       return
     }
-    refigurePantry(pantryItem,currentIngredient) 
+    refigurePantry(pantryItem, currentIngredient) 
   })
   return new Pantry(currentUser.pantry)
 };
 
 function grabRecipes() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData')
-  .then(response => response.json())
-  .then(recipeObject => {
-    recipesData = recipeObject.recipeData
-  })
-  .catch(err => {
-    console.log(err);
-    alert('Sorry, the recipes failed to load. Try again later.')})
+    .then(response => response.json())
+    .then(recipeObject => {
+      recipesData = recipeObject.recipeData
+    })
+    .catch(err => {
+      console.log(err);
+      alert('Sorry, the recipes failed to load. Try again later.')
+    })
 };
 
 function grabUsers() {
-  return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData',)
-  .then(response => {
-    return response.json()
-  })
-  .then(data => {
-    domUpdates.greetUser(data.wcUsersData[domUpdates.randomNumber -1])
-     return data.wcUsersData;
-      })
-  .catch(err => {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData')
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      domUpdates.greetUser(data.wcUsersData[domUpdates.randomNumber - 1])
+      return data.wcUsersData;
+    })
+    .catch(err => {
       console.log(err);
       alert('Sorry, the user information failed to load. Try again later.');
-  })
+    })
 };
 
-  function grabIngredients() {
+function grabIngredients() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/ingredients/ingredientsData')
-  .then(response => {
+    .then(response => {
       return response.json()
-  }).then(ingredientData => {
+    }).then(ingredientData => {
       return ingredientData.ingredientsData;
-      })
-  .catch(err => {
+    })
+    .catch(err => {
       console.log(err);
       alert('Sorry, the ingredients failed to load. Try again later.');    
-  })
+    })
 };
 
 function mergeFetchTimelines() {
- Promise.all([grabUsers(), grabIngredients(), grabRecipes()])
- .then(values => {
-   let usersData = values[0];
-   ingredientsData = values[1];
-    currentUser = createUser(usersData)
-    domUpdates.displayAllRecipes(recipesData,currentUser);
-    pantry = createPantry(currentUser,ingredientsData)
-    missingIng = findWhichIngredientsAreMissing(recipesData)
-    cookAbleRecipes = findRecipiesCanCook(missingIng)
- })
-  .catch(err => {
-      console.log(err);
+  Promise.all([grabUsers(), grabIngredients(), grabRecipes()])
+    .then(values => {
+      let usersData = values[0];
+      ingredientsData = values[1];
+      currentUser = createUser(usersData)
+      domUpdates.displayAllRecipes(recipesData, currentUser);
+      pantry = createPantry(currentUser, ingredientsData)
+      missingIng = findWhichIngredientsAreMissing(recipesData)
+      cookAbleRecipes = findRecipiesCanCook(missingIng)
+    })
+    .catch(err => {
+     console.log(err);
       alert('Sorry, the information failed to load. Try again later.');
-  }) 
+    }) 
 };
 
-function findFavorites(currentUser,recipesData,currentUserProperty) {
+function findFavorites(currentUser, recipesData, currentUserProperty) {
   let ids = currentUser[currentUserProperty]
   let favoriteRecipies = recipesData.filter(recipe =>{
     return ids.includes(String(recipe.id))
@@ -212,13 +210,13 @@ function findFavorites(currentUser,recipesData,currentUserProperty) {
   return favoriteRecipies
 };
 
-function findRecipiesCanCook(missingIng){
+function findRecipiesCanCook(missingIng) {
   return missingIng.filter(recipe =>{
-     return recipe.NotEnough.length === 0
+    return recipe.NotEnough.length === 0
   })
 };
 
-function refigurePantry(pantryItem,currentIngredient){
+function refigurePantry(pantryItem, currentIngredient) {
   pantryItem.amount = Math.ceil(pantryItem.amount)
   pantryItem.name = currentIngredient.name;
   pantryItem.estimatedCostInCents = currentIngredient.estimatedCostInCents;
@@ -226,44 +224,43 @@ function refigurePantry(pantryItem,currentIngredient){
 
 function findWhichIngredientsAreMissing(recipesData) {
   return recipesData.map(recipe =>{
-    return {name :recipe.name, id:recipe.id,ingredients:recipe.ingredients, NotEnough:pantry.findWhichIngredientsAreShort(recipe)}
+    return {name: recipe.name, id: recipe.id, ingredients: recipe.ingredients, NotEnough: pantry.findWhichIngredientsAreShort(recipe)}
  })
 };
 
-function filterInputs(letters,ingredientsData,currentUserProperty){
-  if(letters === ''){
+function filterInputs(letters, ingredientsData, currentUserProperty) {
+  if (letters === '') {
     return recipesData
   }
   letters = letters.trim()
   let arrayToFilter;
-  if(currentUserProperty === undefined){
-     arrayToFilter = recipesData;
-  }
-  else{
-   arrayToFilter = findFavorites(currentUser,recipesData,currentUserProperty);
-  }
-  return findLettersInRecipes(arrayToFilter,letters,ingredientsData)
+  if (currentUserProperty === undefined) {
+    arrayToFilter = recipesData;
+  } else {
+    arrayToFilter = findFavorites(currentUser, recipesData, currentUserProperty);
+  } 
+  return findLettersInRecipes(arrayToFilter, letters, ingredientsData)
 };
 
-function findLettersInRecipes (arrayToFilter,letters,ingredientsData){
+function findLettersInRecipes (arrayToFilter, letters, ingredientsData) {
   return arrayToFilter.filter(recipe => {
-    let correctIngredient  = ingredientsData.find(ingredient =>{ 
+    let correctIngredient  = ingredientsData.find(ingredient => { 
       return recipe.ingredients.find(recIngredients => {
         return recIngredients.id === ingredient.id
       })
-     })
+    })
     return correctIngredient.name.toUpperCase().includes(letters.toUpperCase()) || recipe.name.toUpperCase().includes(letters.toUpperCase()) || recipe.tags.join('').includes(letters)
   })
 };
 
-function findNames(recipe,ingredientsData) {
+function findNames(recipe, ingredientsData) {
   recipe.ingredients.forEach(ingredient =>{
-    let correctIngredient= ingredientsData.find(ing =>{
-        return ingredient.id === ing.id
-      })    
-      ingredient.name = correctIngredient.name
-    })
-  };
+    let correctIngredient = ingredientsData.find(ing =>{
+      return ingredient.id === ing.id
+    })    
+    ingredient.name = correctIngredient.name
+  })
+};
   
 
 

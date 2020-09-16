@@ -127,13 +127,6 @@ h1 {
     width: 50%;
   }
 
-  .menu-my-pantry {
-    
-  }
-
-  .menu-my-upcoming-recipes {
-  }
-
   .menu-favorites {
     border: none;
   }
@@ -234,10 +227,6 @@ h1 {
     width: 2rem;
   }
 
-  .recipe-name-area {
-
-  }
-
   .recipe-name {
     text-align: center;
   }
@@ -253,9 +242,6 @@ h1 {
   }
 }
 
-
-
-
 .user-info {
   margin: 0 auto;
   text-align: center;
@@ -267,29 +253,9 @@ h1 {
   cursor: pointer;
 }
 
-
 .menu-selection:active,
 .search-icon:active {
   background-color: $tertiary-color;
-}
-
-
-.card-button {
-  border: 1px solid $darkest-color;
-  height: 27px;
-  margin: 3px;
-}
-
-
-
-.add-button {
-  background-color: $highlight-color;
-  display: flex;
-  width: 12%;
-}
-
-.add {
-  width: 100%;
 }
 
 
@@ -299,24 +265,6 @@ h1 {
   background-repeat: no-repeat;
   background-position: center;
   width: 13%;
-}
-
-.card {
-  background-color: #D7F2FE;
-  border: 3px solid $darkest-color;
-  width: 100%;
-}
-
-.all {
-  grid-gap: 0px;
-  grid-template-columns: repeat(1, 1fr);
-}
-
-.all-recipe-info,
-ol {
-  color: $highlight-color;
-  font-size: 220%;
-  width: 100%;
 }
 
 h3 {
@@ -331,16 +279,16 @@ h3 {
   text-align: center;
 }
 
-.card-picture:hover {
+.card-image:hover {
   opacity: 0.7;
 }
 
-.card-picture:active {
+.card-image:active {
   border: 2px solid $darkest-color;
 }
 
 main {
-  @include centerFlex()
+  @include centerFlex();
   background-color: #37515C;
   height: auto;
   width: 100%;
