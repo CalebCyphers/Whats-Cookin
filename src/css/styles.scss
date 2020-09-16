@@ -10,6 +10,9 @@ $darkest-color: #000;
   align-items: center;
 }
 
+label {
+  color: $highlight-color;
+}
 
 html {
   display: flex;
@@ -41,6 +44,7 @@ body {
     height: 30rem;
     width: 80%;
     border-radius: 0.5rem;
+    overflow: scroll;
   }
 
   .page-title {
